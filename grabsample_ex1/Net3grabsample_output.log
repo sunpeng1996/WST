@@ -1,0 +1,7 @@
+wst.grabsample - INFO - WST grabsample subcommand
+wst.grabsample - INFO - ---------------------------
+wst.grabsample - INFO - Validating configuration file
+wst - INFO - 
+WST abnormal termination
+wst - INFO - ---------------------------
+wst - ERROR - EPANET inp file not loaded using pyepanet

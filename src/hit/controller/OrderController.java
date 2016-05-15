@@ -27,8 +27,9 @@ public class OrderController extends AbstractController {
 		 excuteCommand("ping 192.168.8.100");*/
 		  //测试通过
 		 
-	//	excuteCommand("cmd.exe /C cd F:\\wst-1.2\\bin");
-		excuteCommand("wst");
+		/*excuteCommand("cmd.exe /C cd F:\\wst-1.2\\bin");
+		excuteCommand("java");*/
+		excuteCommand("ipconfig");
 		 //String[] commands = new String[]{"wst", "grabsample", "grabsample_ex1.yml"};
 		/* excuteCommand("wst grabsample grabsample_ex1.yml"); */
 		 // Runtime.getRuntime().exec(commands);
@@ -75,11 +76,10 @@ public class OrderController extends AbstractController {
 		        Process p;
 		            try {
 		                p = r.exec(command);
-		                BufferedReader br = new BufferedReader(new InputStreamReader(p.getInputStream()));
+		                BufferedReader br = new BufferedReader(new InputStreamReader(p.getInputStream(),"gbk"));
 		                String inline;
 		                while ((inline = br.readLine()) != null) {
 		                    System.out.println(inline);
-		                    System.out.println(1);
 		                }
 		                br.close();
 		            } catch (IOException e) {

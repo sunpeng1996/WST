@@ -15,6 +15,7 @@
     <!-- 强制使用CGLIB代理  -->
     <aop:aspectj-autoproxy proxy-target-class="true"/>
     
+    <context:component-scan base-package="hit"/>
     
      
 </beans>
