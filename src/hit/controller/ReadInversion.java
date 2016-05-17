@@ -130,17 +130,19 @@ public class ReadInversion extends AbstractController {
 				}
 				//System.out.println(str);
 			}
+			System.out.println("全部输出完毕---------------------------~~~~~~~~~~~~");
+			return "Page/form1";
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			System.out.println("出错啦");
 		}
-		return "form1";
-		
-		
+		return "Page/form1";
 	}
 	
 	@RequestMapping(value="/saveYML1.do",method={RequestMethod.POST})
 	public void saveYML1(HttpServletRequest request) {
+			
 			System.out.println("这里存储到文件中");
 		
 	}

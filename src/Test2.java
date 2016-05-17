@@ -2,29 +2,23 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Date;
+
 /**
  * 
  * @author 作者: 如今我已·剑指天涯
- * @Description:这是取样点优化的cmd命令
- *创建时间:2016年5月15日下午9:56:59
+ * @Description:这是污染源定位的cmd命令
+ *创建时间:2016年5月15日下午9:57:37
  */
-
-public class Test {
+public class Test2 {
 
 	public static void main(String[] args) {
 		try {
-		/*	excuteCommand(new String[] { "wst","grabsample","grabsample_ex1.yml" },
-					new String[]{"wst=F:\\wst-1.2\\bin\\wst.exe"},
-					new File("f:/wst-1.2/bin"));*/	
-	//	excuteCommand(new String[]{"F:\\wst-1.2\\bin\\epanet.exe"});
 			long startTime=System.currentTimeMillis();   //获取开始时间
-		excuteCommand(new String[]{"G:\\wst-1.2\\bin\\wst.exe","grabsample","G:\\wst-1.2\\bin\\grabsample_ex1.yml"},
-				/*new String[]{"wst=G:\\wst-1.2\\bin"},*/null,
-				new File("G:/wst-1.2/bin"));
-		
-		long endTime=System.currentTimeMillis(); //获取结束时间
-		System.out.println("程序运行时间： "+(endTime-startTime)+"ms");
+			excuteCommand(new String[]{"G:\\wst-1.2\\bin\\wst.exe","inversion","G:\\wst-1.2\\bin\\inversion_ex1.yml"},
+					null,new File("G:/wst-1.2/bin"));
+			
+			long endTime=System.currentTimeMillis(); //获取结束时间
+			System.out.println("污染源定位程序运行时间： "+(endTime-startTime)+"ms");
 		} catch (Exception e) {
 			System.out.println("Error!");
 		}

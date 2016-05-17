@@ -18,12 +18,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		污染源定位
 	</div>
 	<div class="btn">
-		<button  type="submit"  formaction="<%=path%>/readYML1.do" >编辑</button>
+	<%--  type="submit"  formaction="<%=path%>/readYML1.do" --%>
+		<button  onclick="return a()" >编辑</button>
 		<button onclick='return a1()'>计算</button>
 	</div>
 	<script type='text/javascript'>
-		 function a(){
-			parent.window.returnValue=true;
+		 function a(){			 
+			 window.location="<%=path%>/readYML1.do";
+			/* parent.window.returnValue=true; */
 			window.close();
 		} 
 		function a1(){

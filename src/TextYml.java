@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import org.ho.yaml.Yaml;
 import org.junit.Assert;
+import org.junit.Test;
 
 
 public class TextYml {
@@ -19,12 +20,16 @@ public class TextYml {
         System.out.println("1234");
     }
 	
+	@Test
 	  public void getYamlFile() throws FileNotFoundException{    
-	        File f = new File("src/com/test/Test2.yaml");
+	        File f = new File("G:/wst-1.2/bin/grabsample_ex1.yml");
 	        System.out.println(f.getAbsolutePath());
 	        HashMap ml = Yaml.loadType(new FileInputStream(f.getAbsolutePath()), HashMap.class);
 	        System.out.println(ml.size());        
-	        System.out.println(((HashMap) ml.get("loadString")).get("locater"));        
+	        //System.out.println();
+	        HashMap object = (HashMap) ml.get("grabsample");
+	        System.out.println(object.get("sample time"));
+	        
 	    }
 
 }
