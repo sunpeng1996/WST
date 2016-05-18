@@ -1,54 +1,46 @@
-<!DOCTYPE html>
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-%>
+<!DOCTYPE html >
 <html >
 <head>
-<link rel="Shortcut Icon" href="images/bg.png">
+<link rel="Shortcut Icon" href="../images/bg.png">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>水资源调查</title>
-<link rel="stylesheet" type="text/css" href="Css/index.css">
-<link rel="stylesheet" type="text/css" href="Css/table_set.css">
+<link rel="stylesheet" type="text/css" href="../Css/index.css">
+<link rel="stylesheet" type="text/css" href="../Css/table_set.css">
 </head>
 
 <body id="bg">
 <div class="web_title">
+	<img src="../images/bg.png" alt="logo">
 	<span>哈尔滨工业大学市政学院</span>
 </div>
 <div class="container">
 
 	<div class="leftsidebar_box">
 		<dl class="system_log">
-			<dt onClick="changeImage()">污染源定位<img src="images/left/select_xl01.png"></dt>
+			<dt onClick="changeImage()">污染源定位<img src="../images/left/select_xl01.png"></dt>
 			<dd class="first_dd"><a href="##" id="polution_edit_a">编辑</a></dd>
-			<dd><a href="<%=path %>/Inversion.do" id="polution_count">计算</a></dd>
+			<dd><a href="#" id="polution_count">计算</a></dd>
 		</dl>
 	
 		<dl class="custom">
-			<dt onClick="changeImage()">取样点优化<img src="images/left/select_xl01.png"></dt>
+			<dt onClick="changeImage()">取样点优化<img src="../images/left/select_xl01.png"></dt>
 			<dd class="first_dd"><a href="##" id="sample_edit_a">编辑</a></dd>
 			<dd><a href="#" id="sample_count">计算</a></dd>
 		</dl>
 	
 		<dl class="channel">
-			<dt>阀门调度<img src="images/left/select_xl01.png"></dt>
+			<dt>阀门调度<img src="../images/left/select_xl01.png"></dt>
 			<dd class="first_dd"><a href="##" id="dispatch_edit_a">编辑</a></dd>
 			<dd><a href="##" id="dispatch_count">计算</a></dd>
 		</dl>
 	
 		<dl class="app">
-			<dt onClick="changeImage()">消毒增压<img src="images/left/select_xl01.png"></dt>
+			<dt onClick="changeImage()">消毒增压<img src="../images/left/select_xl01.png"></dt>
 			<dd class="first_dd"><a href="##" id="degassing_edit_a">编辑</a></dd>
 			<dd><a href="##" id="degassing_count">计算</a></dd>
 		</dl>
 	</div>
 	<div class="web_content">
-	<div class="welcome">
-		<img src="images/welcome.jpg" alt="welcome_logo">
-		<span>供水管网水质预警系统</span>
-	</div>
 		<div class="polution_edit table_set">
 				<form action="#" method="get" accept-charset="utf-8">
 					<table>
@@ -60,72 +52,72 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						</tr>
 						<tr>
 							<td>EPANET管网模型：</td>
-							<td><input type="text" value="${sessionScope.epanet }" ></input></td>
+							<td><input type="text"></input></td>
 							<td>模型：</td>
-							<td><input type="text" value="${sessionScope.algorithm }"></input></td>
+							<td><input type="text"></input></td>
 						</tr>
 						<tr>
 							<td class="catalogue" colspan="2">监测数据</td>
 							<td>注入类型：</td>
-							<td><input type="text" value="${sessionScope.formulation }"></input></td>
+							<td><input type="text"></input></td>
 						</tr>
 						<tr>
 							<td >取样数据：</td>
-							<td><input type="text" value="${sessionScope.grab_samples}"></input></td>
+							<td><input type="text"></input></td>
 							<td>模型格式：</td>
-							<td><input type="text" value="${sessionScope.model_format}"></input></td>
-						</tr> 
+							<td><input type="text"></input></td>
+						</tr>
 						<tr>
 							<td class="catalogue" colspan="2">求解程序</td>
 							<td>时间：</td>
-							<td><input type="text" value="${sessionScope.horizon }"></input></td>
+							<td><input type="text"></input></td>
 						</tr>
 						<tr>
 							<td>类型：</td>
-							<td><input type="text" value="${sessionScope.type }"></input></td>
+							<td><input type="text"></input></td>
 							<td>注入节点数量：</td>
-							<td><input type="text" value="${sessionScope.num_injections }"></input></td>
+							<td><input type="text"></input></td>
 						</tr>
 						<tr>
 							<td>选项：</td>
-							<td><input type="text" value="${sessionScope.options }"></input></td>
+							<td><input type="text"></input></td>
 							<td>监测失败率：</td>
-							<td><input type="text" value="${sessionScope.measurement_failure }"></input></td>
+							<td><input type="text"></input></td>
 						</tr>
 						<tr>
 							<td>记录文件：</td>
-							<td><input type="text" value="${sessionScope.logfile }"></input></td>
+							<td><input type="text"></input></td>
 							<td>正阕值：</td>
-							<td><input type="text" value="${sessionScope.positive_threshold }"></input></td>
+							<td><input type="text"></input></td>
 						</tr>
 						<tr>
 							<td>冗余：</td>
-							<td><input type="text" value="${sessionScope.verbose }"></input></td>
+							<td><input type="text"></input></td>
 							<td>负阕值：</td>
-							<td><input type="text" value="${sessionScope.negative_threshold }"></input></td>
+							<td><input type="text"></input></td>
 						</tr>
 						<tr>
 							<td>起始节点：</td>
-							<td><input type="text" value="${sessionScope.initial_points }"></input></td>
+							<td><input type="text"></input></td>
 							<td>可行节点：</td>
-							<td><input type="text" value="${sessionScope.feasible_nodes }"></input></td>
+							<td><input type="text"></input></td>
 						</tr>
 						<tr>
 							<td class="catalogue" colspan="2">配置</td>
 							<td>候选阕值：</td>
-							<td><input type="text" value="${sessionScope.candidate_threshold }"></input></td>
+							<td><input type="text"></input></td>
 						</tr>
 						<tr>
-							<td>输出前缀：</td>
-							<td><input type="text" value="${sessionScope.output_prefix }"></input></td>
+							<td>输入前缀：</td>
+							<td><input type="text"></input></td>
 							<td>置信度：</td>
-							<td><input type="text" value="${sessionScope.confidence }"></input></td>
+							<td><input type="text"></input></td>
 						</tr>
 						<tr>
 							<td>调试：</td>
-							<td><input type="text" value="${sessionScope.debug }"></input></td>
+							<td><input type="text"></input></td>
 							<td>输出影响节点：</td>
-							<td><input type="text" value="${sessionScope.output_impact_nodes }"></input></td>
+							<td><input type="text"></input></td>
 						</tr>
 					</tbody>
 					</table>
@@ -378,208 +370,54 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<input id="reset" type="reset" value="取消"></input>
 				</form>
 		</div>
-		<div class="degassing_edit table_set">
-			<form action="#" method="get" accept-charset="utf-8">
-					<table>
-					<caption>booster_mip</caption>
-					<tbody>
-						<tr>
-							<td  class="catalogue" colspan="2">管网模型</td>
-							<td class="catalogue" colspan="2">booster_mip</td>
-						</tr>
-						<tr>
-							<td>epanet文件</td>
-							<td><input type="text"></input></td>
-							<td>传感器节点编号：</td>
-							<td><input type="text"></input></td>
-						</tr>
-						<tr>
-							<td class="catalogue" colspan="2">场景</td>
-							<td>模型格式：</td>
-							<td><input type="text"></input></td>
-						</tr>
-						<tr>
-							<td >位置：</td>
-							<td><input type="text"></input></td>
-							<td>模型类型：</td>
-							<td><input type="text"></input></td>
-						</tr>
-						<tr>
-							<td>强度：</td>
-							<td><input type="text"></input></td>
-							<td>目标：</td>
-							<td><input type="text"></input></td>
-						</tr>
-						<tr>
-							<td>种类：</td>
-							<td><input type="text"></input></td>
-							<td>污染物衰减系数：</td>
-							<td><input type="text"></input></td>
-						</tr>
-						<tr>
-							<td>开始时间：</td>
-							<td><input type="text"></input></td>
-							<td>消毒剂衰减系数：</td>
-							<td><input type="text"></input></td>
-						</tr>
-						<tr>
-							<td>结束时间：</td>
-							<td><input type="text"></input></td>
-							<td>可行节点：</td>
-							<td><input type="text"></input></td>
-						</tr>
-						<tr>
-							<td>tag文件：</td>
-							<td><input type="text"></input></td>
-							<td>不可行节点：</td>
-							<td><input type="text"></input></td>
-						</tr>
-						<tr>
-							<td>msx文件：</td>
-							<td><input type="text"></input></td>
-							<td>固定节点：</td>
-							<td><input type="text"></input></td>
-						</tr>
-						<tr>
-							<td>msx种类：</td>
-							<td><input type="text"></input></td>
-							<td>增压磊站最大数：</td>
-							<td><input type="text"></input></td>
-						</tr>
-						<tr>
-							<td>merlion：</td>
-							<td><input type="text"></input></td>
-							<td>类型：</td>
-							<td><input type="text"></input></td>
-						</tr>
-						<tr>
-							<td class="catalogue" colspan="2">求解程序</td>
-							<td>强度：</td>
-							<td><input type="text"></input></td>
-						</tr>
-						<tr>
-							<td>类型：</td>
-							<td><input type="text"></input></td>
-							<td>反应时间：</td>
-							<td><input type="text"></input></td>
-						</tr>
-						<tr>
-							<td>选项：</td>
-							<td><input type="text"></input></td>
-							<td>持续时间：</td>
-							<td><input type="text"></input></td>
-						</tr>
-						<tr>
-							<td>记录文件：</td>
-							<td><input type="text"></input></td>
-							<td>评估：</td>
-							<td><input type="text"></input></td>
-						</tr>
-						<tr>
-							<td>冗余：</td>
-							<td><input type="text"></input></td>
-							<td colspan="2" class="catalogue">配置</td>
-						</tr>
-						<tr>
-							<td>起始节点：</td>
-							<td><input type="text"></input></td>
-							<td>输出前缀：</td>
-							<td><input type="text"></input></td>
-						</tr>
-						<tr>
-							<td colspan="2" class="catalogue"></td>
-							<td>调试：</td>
-							<td><input type="text"></input></td>
-						</tr>
-						<tr>
-							<td colspan="2" class="catalogue"></td>
-							<td>事件检测：</td>
-							<td><input type="text"></input></td>
-						</tr>
-						<tr>
-							<td colspan="2" class="catalogue"></td>
-							<td>增压磊站影响：</td>
-							<td><input type="text"></input></td>
-						</tr>
-					</tbody>
-					</table>
-					<input id="submit" type="submit" value="提交"></input>
-					<input id="reset" type="reset" value="取消"></input>
-				</form>
+		<div class="degassing_edit">
+			44444444444
 		</div>
 	</div>
 </div>
 
 
 
-<script type="text/javascript" src="Js/jquery.js"></script>
+<script type="text/javascript" src="../Js/jquery.js"></script>
 <script type="text/javascript">
 $(".leftsidebar_box dt").css({"background-color":"#e0edff"});
-$(".leftsidebar_box dt img").attr("src","images/left/select_xl01.png");
+$(".leftsidebar_box dt img").attr("src","../images/left/select_xl01.png");
 $(function(){
 	$(".leftsidebar_box dd").hide();
 	$(".leftsidebar_box dt").click(function(){
 		$(".leftsidebar_box dt").css({"background-color":"#e0edff"})
 		$(this).css({"background-color": "#e0ebfd"});
 		$(this).parent().find('dd').removeClass("menu_chioce");
-		$(".leftsidebar_box dt img").attr("src","images/left/select_xl01.png");
-		$(this).parent().find('img').attr("src","images/left/select_xl.png");
+		$(".leftsidebar_box dt img").attr("src","../images/left/select_xl01.png");
+		$(this).parent().find('img').attr("src","../images/left/select_xl.png");
 		$(".menu_chioce").slideUp(); 
 		$(this).parent().find('dd').slideToggle();
 		$(this).parent().find('dd').addClass("menu_chioce");
 	});
 	$("#polution_edit_a").click(function(){
-		$('.welcome').css({'display':'none'});
 		$('.sample_edit').css({'display':'none'});
 		$('.dispatch_edit').css({'display':'none'});
 		$('.degassing_edit').css({'display':'none'});
 		$('.polution_edit').css({'display':'block'});
-		//alert("你好");
-		$.ajax({ 
-            url:basePath + "/readInversionYaml.do", 
-            type:'GET', 
-            success: function(data){ 
-            	alert('success');
-            	$("#polution_edit table_set").html(data);
-            },
-            error: function(data){
-                alert("gg");
-            }
-        }); 
 	});
 	$("#sample_edit_a").click(function(){
-		$('.welcome').css({'display':'none'});
 		$('.polution_edit').css({'display':'none'});
 		$('.dispatch_edit').css({'display':'none'});
 		$('.degassing_edit').css({'display':'none'});
 		$('.sample_edit').css({'display':'block'});
 	});
 	$("#dispatch_edit_a").click(function(){
-		$('.welcome').css({'display':'none'});
 		$('.sample_edit').css({'display':'none'});
 		$('.polution_edit').css({'display':'none'});
 		$('.degassing_edit').css({'display':'none'});
 		$('.dispatch_edit').css({'display':'block'});
 	});
 	$("#degassing_edit_a").click(function(){
-		$('.welcome').css({'display':'none'});
 		$('.sample_edit').css({'display':'none'});
 		$('.dispatch_edit').css({'display':'none'});
 		$('.polution_edit').css({'display':'none'});
 		$('.degassing_edit').css({'display':'block'});
 	});
-	
-	$("#degassing_edit_a").click(function(){
-		$('.welcome').css({'display':'none'});
-		$('.sample_edit').css({'display':'none'});
-		$('.dispatch_edit').css({'display':'none'});
-		$('.polution_edit').css({'display':'none'});
-		$('.degassing_edit').css({'display':'block'});
-	});
-	
-	
-	
-	
 })
 </script>
 

@@ -1,7 +1,14 @@
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import org.ho.yaml.Yaml;
 import org.junit.Assert;
@@ -21,15 +28,26 @@ public class TextYml {
     }
 	
 	@Test
-	  public void getYamlFile() throws FileNotFoundException{    
-	        File f = new File("G:/wst-1.2/bin/grabsample_ex1.yml");
+	  public void getYamlFile() throws IOException{    
+	        File f = new File("G:/grabsample_ex1.yml");
 	        System.out.println(f.getAbsolutePath());
 	        HashMap ml = Yaml.loadType(new FileInputStream(f.getAbsolutePath()), HashMap.class);
 	        System.out.println(ml.size());        
 	        //System.out.println();
 	        HashMap object = (HashMap) ml.get("grabsample");
+	        object.replace("sample time", object.get("sample time"), 87897);
+	        
+	        Yaml yaml = new Yaml();
+	        yaml.dump(ml, new File("G:/grabsample_ex1.yml"), false);
+	        
+	        
+	      /*  System.out.println(ml.values());*/
+	        
 	        System.out.println(object.get("sample time"));
 	        
 	    }
+	
+	
+		
 
 }
