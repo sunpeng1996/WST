@@ -1,4 +1,8 @@
 package hit.controller;
+/**
+ * 取样点优化
+ */
+import hit.util.CommandUtils;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -17,10 +21,7 @@ import org.springframework.web.servlet.mvc.AbstractController;
 @Controller
 public class GrabsampleController extends AbstractController {
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
-	}
+	
 
 	@Override
 	protected ModelAndView handleRequestInternal(HttpServletRequest arg0,
@@ -32,6 +33,7 @@ public class GrabsampleController extends AbstractController {
 	@RequestMapping(value="")
 	public void readYaml(HttpServletRequest request) throws FileNotFoundException{
 		//读取取样点优化的配置文件，并把数据保存到session域中
+	
 		 File f = new File("G:/wst-1.2/bin/grabsample_ex1.yml");
 		 System.out.println(f.getAbsolutePath());
 		 HashMap ml = Yaml.loadType(new FileInputStream(f.getAbsolutePath()), HashMap.class);
@@ -86,6 +88,25 @@ public class GrabsampleController extends AbstractController {
 		
 		
 		return null;
+		
+	}
+	
+	/**
+	 * 
+	 * @author 作者: 如今我已·剑指天涯
+	 * @Description:调用取样点优化的方法
+	 *创建时间:2016年5月17日下午5:16:52
+	 */
+	@RequestMapping(value="/Grabsample.do")
+	public String Inversion(HttpServletRequest request){
+		long startTime=System.currentTimeMillis();   //获取开始时间
+		CommandUtils.excuteCommand(new String[]{"G:\\wst-1.2\\bin\\wst.exe","grabsample ","G:\\wst-1.2\\bin\\grabsample_ex1.yml"},
+							null,	new File("G:/wst-1.2/bin"));
+		long endTime=System.currentTimeMillis(); //获取结束时间
+		long totalTime = endTime-startTime;
+		System.out.println("取样点优化程序运行时间： "+(totalTime)+"ms");
+		//然后跳转到运行之后生成的页面就可以了
+		return "Page/grabsample";
 		
 	}
 

@@ -38,7 +38,7 @@ public class TestUpdateYml {
 	  //  String output = yaml.dump(bigMap);
 	    File file = new File("c:/1.yml");
 	    StringWriter writer = new StringWriter();
-	    yaml.dump(bigMap, writer);
+	    //yaml.dump(bigMap, writer);
 	    System.out.println();
 	}
 	

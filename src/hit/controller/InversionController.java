@@ -4,6 +4,7 @@ package hit.controller;
  * 污染源定位的controller
  */
 import hit.util.CommandUtils;
+import hit.util.modifyYml;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -17,6 +18,8 @@ import org.ho.yaml.Yaml;
 import org.junit.Test;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.AbstractController;
 @Controller
@@ -34,9 +37,15 @@ public class InversionController extends AbstractController {
 		return null;
 	}
 	
-	@RequestMapping(value="/readInversionYaml.do")
+	@RequestMapping(value="/readInversionYaml.do",method={RequestMethod.POST,RequestMethod.GET})
 	public String readYaml(HttpServletRequest request) throws FileNotFoundException{
 		//读取污染源定位的配置文件，并把数据保存到session域中
+		
+		
+		request.getSession().removeAttribute("epanet");
+		
+		System.out.println("到达污染源定位的后台action位置");
+		
 		 File f = new File("G:/wst-1.2/bin/inversion_ex1.yml");
 		 System.out.println(f.getAbsolutePath());
 		 HashMap ml = Yaml.loadType(new FileInputStream(f.getAbsolutePath()), HashMap.class);
@@ -47,6 +56,8 @@ public class InversionController extends AbstractController {
 	        HashMap inversion = (HashMap) ml.get("inversion");
 	        HashMap solver = (HashMap) ml.get("solver");
 	        HashMap configure = (HashMap) ml.get("configure");
+	        
+	        
 	        
 	        request.getSession().setAttribute("epanet", network.get("epanet file"));//EPANET管网模型
 	        System.out.println(network.get("epanet file"));
@@ -68,9 +79,6 @@ public class InversionController extends AbstractController {
 	        request.getSession().setAttribute("output_impact_nodes", inversion.get("output impact nodes"));
 	   
 	        
-	        
-	     
-	        
 	        request.getSession().setAttribute("type", solver.get("type"));
 	        request.getSession().setAttribute("options", solver.get("options"));
 	        request.getSession().setAttribute("logfile", solver.get("logfile"));
@@ -80,9 +88,11 @@ public class InversionController extends AbstractController {
 	        
 	        request.getSession().setAttribute("output_prefix", configure.get("output prefix"));
 	        request.getSession().setAttribute("debug", configure.get("debug"));
+	        System.out.println("----------dasdadadada");
+	        
+	        
+	        
 			return null;
-        
-		
 	}
 	
 	/**
@@ -91,13 +101,66 @@ public class InversionController extends AbstractController {
 	 * @Description:修改yaml配置文件的方法
 	 *创建时间:2016年5月18日下午2:41:37
 	 * @return
+	 * @throws FileNotFoundException 
 	 */
 	@RequestMapping(value="saveInversionYAML.do")
-	public String saveYAML(){
+	public String saveYAML(HttpServletRequest request,@RequestParam(defaultValue="") String epanet,
+			@RequestParam(defaultValue="") String algorithm,	@RequestParam(defaultValue="") String formulation,
+			@RequestParam(defaultValue="") String grab_samples,	@RequestParam(defaultValue="") String model_format,	
+			@RequestParam(defaultValue="") String horizon,	@RequestParam(defaultValue="") String type,	
+			@RequestParam(defaultValue="") String num_injections,	@RequestParam(defaultValue="") String options,	
+			@RequestParam(defaultValue="") String measurement_failure,	@RequestParam(defaultValue="") String logfile,	
+			@RequestParam(defaultValue="") String positive_threshold,	@RequestParam(defaultValue="") String verbose,	
+			@RequestParam(defaultValue="") String negative_threshold,	@RequestParam(defaultValue="") String initial_points,	
+			@RequestParam(defaultValue="") String feasible_nodes,	@RequestParam(defaultValue="") String candidate_threshold,	
+			@RequestParam(defaultValue="") String output_prefix,	@RequestParam(defaultValue="") String confidence	,	
+			@RequestParam(defaultValue="") String debug,	@RequestParam(defaultValue="") String output_impact_nodes	
+			) throws FileNotFoundException{
 		
-		
-		
-		return null;
+		 	File f = new File("G:\\wst-1.2\\bin\\inversion_ex1.yml");
+	        System.out.println(f.getAbsolutePath());
+	        HashMap ml = Yaml.loadType(new FileInputStream(f.getAbsolutePath()), HashMap.class);
+	        System.out.println(ml.size());        
+	        //System.out.println();
+	        HashMap network = (HashMap) ml.get("network");
+	        HashMap measurements = (HashMap) ml.get("measurements");
+	        HashMap inversion = (HashMap) ml.get("inversion");
+	        HashMap solver = (HashMap) ml.get("solver");
+	        HashMap configure = (HashMap) ml.get("configure");
+	        
+	        
+	        network.replace("epanet file", network.get("epanet file"), epanet);
+	        
+	        measurements.replace("grab samples",  measurements.get("grab samples"),grab_samples );
+	        
+	        inversion.replace("algorithm",inversion.get("algorithm") , algorithm);
+	        inversion.replace("horizon", inversion.get("horizon"), horizon);
+	        inversion.replace("formulation", inversion.get("formulation"),formulation );
+	        inversion.replace("model format", inversion.get("model format"), model_format);
+	        inversion.replace("num injections", inversion.get("num injections"),num_injections );
+	        inversion.replace("measurement failure", inversion.get("measurement failure"),measurement_failure );
+	        inversion.replace("positive threshold", inversion.get("positive threshold"), positive_threshold);
+	        inversion.replace("negative threshold", inversion.get("negative threshold"), negative_threshold);
+	        inversion.replace("feasible nodes", inversion.get("feasible nodes"),feasible_nodes );
+	        inversion.replace("candidate threshold", inversion.get("candidate threshold"), candidate_threshold);
+	        inversion.replace("confidence", inversion.get("confidence"), confidence);
+	        inversion.replace("output impact nodes", inversion.get("output impact nodes"),output_impact_nodes );
+	        
+	        solver.replace("type",solver.get("type"), type);
+	        solver.replace("options",solver.get("options"), options);
+	        solver.replace("logfile",solver.get("logfile"), logfile);
+	        solver.replace("verbose",solver.get("verbose"), verbose);
+	        solver.replace("initial points",solver.get("initial points"), initial_points);
+	        
+	        configure.replace("output prefix", configure.get("output prefix"), output_prefix);
+	        configure.replace("debug", configure.get("debug"),debug);
+	        
+	        Yaml yaml = new Yaml();
+	        yaml.dump(ml, new File("G:\\wst-1.2\\bin\\inversion_ex1.yml"), false);
+	        modifyYml.modifyFile("G:\\wst-1.2\\bin\\inversion_ex1.yml");
+	        System.out.println("文件已经更改完成");
+	        
+	        return "index";
 		
 	}
 	

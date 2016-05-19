@@ -15,12 +15,12 @@ public class modifyYml {
 	/**
 	 * 
 	 * @author 作者: 如今我已·剑指天涯
-	 * @Description:逐行读取文件并修改，去掉文件中的
+	 * @Description:逐行读取文件并修改，去掉文件中的!java.util.HashMap
 	 *创建时间:2016年5月18日下午4:05:37
 	 * @param fileName
 	 */
 	@Test
-	 public  static void modifyFile(String fileName) {
+	 public  static  void modifyFile(String fileName) {
 		  try{
 		   //文件路径
 		   String filePath = fileName;
@@ -38,6 +38,15 @@ public class modifyYml {
 		    //把读取到的行存入数组变量
 		   }while(temp!=null);
 		   File_pwd.close();
+		   
+		   /**
+		    * 删除原文件
+		    */
+		   File f = new File(filePath);
+		   if(f.exists()){
+			   f.delete();
+		   }
+		   
 		   //将内容写到新文件
 		   //newFilePath = "G:\\newPlayer\\" + fileName;
 		   BufferedWriter File_bak=new BufferedWriter(new FileWriter(new File(filePath)));
@@ -50,16 +59,16 @@ public class modifyYml {
 		    if(s.contains("!java.util.HashMap")){
 		    	String new_s = s.replace("!java.util.HashMap", "");
 		    	File_bak.write(new_s+"\n");
-		    }else {
-				File_bak.write(s+"\n");
-			}
-		    
-		    if (s.contains("--- ")) {
-				String new_s = s.replace("---", "");
+		    }else if(s.contains("--- ")) {
+		    	String new_s = s.replace("---", "");
+				File_bak.write(new_s+"\n");
+			}else if (s.contains("\"")) {
+				String new_s = s.replace("\"", "");
 				File_bak.write(new_s+"\n");
 			}else {
 				File_bak.write(s+"\n");
 			}
+		    
 		    
 		   }
 		   //必须先刷新,才能用close关闭
@@ -71,5 +80,5 @@ public class modifyYml {
 		   System.out.println("file read or write error");
 		  }
 		 }
-
+	
 }
