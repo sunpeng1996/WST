@@ -9,6 +9,7 @@ import hit.util.modifyYml;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,6 +21,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.AbstractController;
 @Controller
@@ -160,6 +162,52 @@ public class InversionController extends AbstractController {
 	        modifyYml.modifyFile("G:\\wst-1.2\\bin\\inversion_ex1.yml");
 	        System.out.println("文件已经更改完成");
 	        
+	        //第二次重复操作，目的是更新session的数据
+	        File f1 = new File("G:/wst-1.2/bin/inversion_ex1.yml");
+			 System.out.println(f.getAbsolutePath());
+			 HashMap ml1 = Yaml.loadType(new FileInputStream(f.getAbsolutePath()), HashMap.class);
+		     System.out.println(ml.size());        
+		        //System.out.println();
+		        HashMap network1 = (HashMap) ml.get("network");
+		        HashMap measurements1 = (HashMap) ml.get("measurements");
+		        HashMap inversion1 = (HashMap) ml.get("inversion");
+		        HashMap solver1 = (HashMap) ml.get("solver");
+		        HashMap configure1 = (HashMap) ml.get("configure");
+		        
+		        
+		        
+		        request.getSession().setAttribute("epanet", network1.get("epanet file"));//EPANET管网模型
+		        System.out.println(network.get("epanet file"));
+		        
+		        request.getSession().setAttribute("grab_samples", measurements1.get("grab samples"));
+		        
+		        
+		        request.getSession().setAttribute("algorithm", inversion1.get("algorithm"));
+		        request.getSession().setAttribute("horizon", inversion1.get("horizon"));
+		        request.getSession().setAttribute("formulation", inversion1.get("formulation"));
+		        request.getSession().setAttribute("model_format", inversion1.get("model format"));
+		        request.getSession().setAttribute("num_injections", inversion1.get("num injections"));
+		        request.getSession().setAttribute("measurement_failure", inversion1.get("measurement failure"));
+		        request.getSession().setAttribute("positive_threshold", inversion1.get("positive threshold"));
+		        request.getSession().setAttribute("negative_threshold", inversion1.get("negative threshold"));
+		        request.getSession().setAttribute("feasible_nodes", inversion1.get("feasible nodes"));
+		        request.getSession().setAttribute("candidate_threshold", inversion1.get("candidate threshold"));
+		        request.getSession().setAttribute("confidence", inversion1.get("confidence"));
+		        request.getSession().setAttribute("output_impact_nodes", inversion1.get("output impact nodes"));
+		   
+		        
+		        request.getSession().setAttribute("type", solver1.get("type"));
+		        request.getSession().setAttribute("options", solver1.get("options"));
+		        request.getSession().setAttribute("logfile", solver1.get("logfile"));
+		        request.getSession().setAttribute("verbose", solver1.get("verbose"));
+		        request.getSession().setAttribute("initial_points", solver1.get("initial points"));
+		        
+		        
+		        request.getSession().setAttribute("output_prefix", configure1.get("output prefix"));
+		        request.getSession().setAttribute("debug", configure1.get("debug"));
+		        System.out.println("----------dasdadadada");
+	        
+	        
 	        return "index";
 		
 	}
@@ -168,11 +216,13 @@ public class InversionController extends AbstractController {
 	/**
 	 * 
 	 * @author 作者: 如今我已·剑指天涯
+	 * @throws IOException 
+	 * @throws IllegalStateException 
 	 * @Description:调用污染源定位命令的方法
 	 *创建时间:2016年5月17日下午5:16:52
 	 */
 	@RequestMapping(value="/Inversion.do")
-	public String Inversion(HttpServletRequest request){
+	public String Inversion(HttpServletRequest request) throws IllegalStateException, IOException{
 		long startTime=System.currentTimeMillis();   //获取开始时间
 		CommandUtils.excuteCommand(new String[]{"G:\\wst-1.2\\bin\\wst.exe","inversion","G:\\wst-1.2\\bin\\inversion_ex1.yml"},
 							null,	new File("G:/wst-1.2/bin"));
@@ -180,8 +230,14 @@ public class InversionController extends AbstractController {
 		long totalTime = endTime-startTime;
 		System.out.println("污染源定位程序运行时间： "+(totalTime)+"ms");
 		//然后跳转到运行之后生成的页面就可以了
+		
+		//作死，设计文件上传
+		//FileUploadToServer(request,"G:\\wst-1.2\\bin\\inversion_ex1\\Net3visualization_output.html");
+		
 		return "Page/inversion";
 		
 	}
+
+
 
 }

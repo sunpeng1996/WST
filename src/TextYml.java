@@ -54,7 +54,7 @@ public class TextYml {
 	        
 	      /*  System.out.println(ml.values());*/
 	        
-	        modifyYml.modifyFile("G:/grabsample_ex1.yml");
+	        //modifyYml.modifyFile("G:/grabsample_ex1.yml");
 	        System.out.println(object.get("sample time"));
 	        
 	    }
