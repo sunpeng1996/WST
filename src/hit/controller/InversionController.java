@@ -48,11 +48,10 @@ public class InversionController extends AbstractController {
 		
 		System.out.println("到达污染源定位的后台action位置");
 		
-		 File f = new File("G:/wst-1.2/bin/inversion_ex1.yml");
-		 System.out.println(f.getAbsolutePath());
-		 HashMap ml = Yaml.loadType(new FileInputStream(f.getAbsolutePath()), HashMap.class);
-	     System.out.println(ml.size());        
-	        //System.out.println();
+			 File f = new File("G:/wst-1.2/bin/inversion_ex1.yml");
+			 System.out.println(f.getAbsolutePath());
+			 HashMap ml = Yaml.loadType(new FileInputStream(f.getAbsolutePath()), HashMap.class);
+
 	        HashMap network = (HashMap) ml.get("network");
 	        HashMap measurements = (HashMap) ml.get("measurements");
 	        HashMap inversion = (HashMap) ml.get("inversion");
@@ -90,7 +89,7 @@ public class InversionController extends AbstractController {
 	        
 	        request.getSession().setAttribute("output_prefix", configure.get("output prefix"));
 	        request.getSession().setAttribute("debug", configure.get("debug"));
-	        System.out.println("----------dasdadadada");
+	        System.out.println("污染源定位----------dasdadadada");
 	        
 	        
 	        

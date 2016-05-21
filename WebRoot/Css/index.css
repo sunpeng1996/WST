@@ -81,12 +81,18 @@ a{text-decoration:none;}
 }
 .leftsidebar_box dt img{position:absolute;right:10px;top:20px;}
 .leftsidebar_box dl dd:last-child{padding-bottom:10px;}
-
+.leftsidebar_box .time_display{
+	margin-left: 40px;
+	margin-top: 200px;
+}
+.leftsidebar_box .time_display span{
+	margin-left: 50px;
+}
 .web_content{
 	float: right;
 	height: auto;
 	width: 83%;
-	background: url(../images/bg.png);
+	/*background: url(../images/bg.png);*/
 	box-sizing: border-box;
 }
 .web_content .welcome{
@@ -124,3 +130,4 @@ a{text-decoration:none;}
 .degassing_edit{
 	display: none;
 }
+

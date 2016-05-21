@@ -153,6 +153,8 @@ public class GrabsampleController extends AbstractController {
 		        
 		        
 		        
+		        
+		        
 		        //第二次重复操作，目的是更新session的数据
 		        File f2 = new File("G:/wst-1.2/bin/grabsample_ex1.yml");
 				 System.out.println(f.getAbsolutePath());
@@ -213,6 +215,7 @@ public class GrabsampleController extends AbstractController {
 	 */
 	@RequestMapping(value="/Grabsample.do")
 	public String Inversion(HttpServletRequest request){
+		System.out.println("执行取样点优化的方法呢");
 		long startTime=System.currentTimeMillis();   //获取开始时间
 		CommandUtils.excuteCommand(new String[]{"G:\\wst-1.2\\bin\\wst.exe","grabsample ","G:\\wst-1.2\\bin\\grabsample_ex1.yml"},
 							null,	new File("G:/wst-1.2/bin"));

@@ -62,7 +62,7 @@ public class modifyYml {
 		    }else if(s.contains("--- ")) {
 		    	String new_s = s.replace("---", "");
 				File_bak.write(new_s+"\n");
-			}else if (s.contains("\"")) {
+			}else if (s.contains("\"") && (!s.contains("[")) && s.contains("[]")) {
 				String new_s = s.replace("\"", "");
 				File_bak.write(new_s+"\n");
 			}else if (s.contains("!java.lang.Double")) {

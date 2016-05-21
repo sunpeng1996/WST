@@ -15,7 +15,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <body id="bg">
 <div class="web_title">
-	<span>哈尔滨工业大学市政学院</span>
+	<span>供水管网水质预警系统</span>
 </div>
 <div class="container">
 
@@ -23,26 +23,30 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<dl class="system_log">
 			<dt onClick="changeImage()">污染源定位<img src="images/left/select_xl01.png"></dt>
 			<dd class="first_dd"><a href="##" id="polution_edit_a" >编辑</a></dd>
-			<dd><a href="<%=path %>/Inversion.do" id="polution_count">计算</a></dd>
+			<dd><a href="<%=path %>/Inversion.do" id="degassing_count">计算</a></dd>
 		</dl>
 	
 		<dl class="custom">
 			<dt onClick="changeImage()">取样点优化<img src="images/left/select_xl01.png"></dt>
 			<dd class="first_dd"><a href="##" id="sample_edit_a">编辑</a></dd>
-			<dd><a href="<%=path %>/Grabsample.do" id="sample_count">计算</a></dd>
+			<dd><a href="<%=path %>/Grabsample.do" id="degassing_count">计算</a></dd>
 		</dl>
 	
 		<dl class="channel">
 			<dt>阀门调度<img src="images/left/select_xl01.png"></dt>
 			<dd class="first_dd"><a href="##" id="dispatch_edit_a">编辑</a></dd>
-			<dd><a href="##" id="dispatch_count">计算</a></dd>
+			<dd><a href="<%=path %>/Flushing.do" id="degassing_count">计算</a></dd>
 		</dl>
 	
 		<dl class="app">
 			<dt onClick="changeImage()">消毒增压<img src="images/left/select_xl01.png"></dt>
 			<dd class="first_dd"><a href="##" id="degassing_edit_a">编辑</a></dd>
-			<dd><a href="##" id="degassing_count">计算</a></dd>
+			<dd><a href="<%=path %>/booster_mip.do" id="degassing_count">计算</a></dd>
 		</dl>
+		<div class="time_display">
+			计算时间：
+			<br><span id="yy004" >0时0分0秒</span>
+		</div>
 	</div>
 	<div class="web_content">
 	<div class="welcome">
@@ -242,7 +246,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</form>
 		</div>
 		<div class="dispatch_edit table_set">
-			<form action="#" method="get" accept-charset="utf-8">
+			<form action="<%=path %>/saveFlushingYAML.do" method="get" accept-charset="utf-8">
 					<table>
 					<caption>阀门调度</caption>
 					<tbody>
@@ -252,9 +256,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						</tr>
 						<tr>
 							<td>epanet文件</td>
-							<td><input type="text" value="${sessionScope.epanet }"></input></td>
+							<td><input type="text" value="${sessionScope.epanet }" name="epanet"></input></td>
 							<td>传感器节点编号：</td>
-							<td><input type="text" value="${sessionScope.detection }"></input></td>
+							<td><input type="text" value="${sessionScope.detection }" name="detection"></input></td>
 						</tr>
 						<tr>
 							<td class="catalogue" colspan="2">场景</td>
@@ -262,117 +266,123 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						</tr>
 						<tr>
 							<td >位置：</td>
-							<td><input type="text" value="${sessionScope.location }"></input></td>
+							<td><input type="text" value="${sessionScope.location }" name="location"></input></td>
 							<td>可行节点：</td>
-							<td><input type="text" value="${sessionScope.feasible_nodes }"></input></td>
+							<td><input type="text" value="${sessionScope.feasible_nodes }" name="feasible_nodes"></input></td>
 						</tr>
 						<tr>
 							<td>类型：</td>
-							<td><input type="text" value="${sessionScope.type_scenario }"></input></td>
+							<td><input type="text" value="${sessionScope.type_scenario }" name="type_scenario"></input></td>
 							<td>不可行节点：</td>
-							<td><input type="text" value="${sessionScope.infeasible_nodes }"></input></td>
+							<td><input type="text" value="${sessionScope.infeasible_nodes }" name="infeasible_nodes"></input></td>
 						</tr>
 						<tr>
 							<td>强度：</td>
-							<td><input type="text" value="${sessionScope.strength }"></input></td>
+							<td><input type="text" value="${sessionScope.strength }" name="strength"></input></td>
 							<td>最大节点数：</td>
-							<td><input type="text" value="${sessionScope.max_nodes }"></input></td>
+							<td><input type="text" value="${sessionScope.max_nodes }" name="max_nodes"></input></td>
+						</tr>
+						<tr>
+							<td>种类：</td>
+							<td><input type="text" value="${sessionScope.species}" name="species"></input></td>
+							<td></td>
+							<td></td>
 						</tr>
 						<tr>
 							<td>开始时间：</td>
-							<td><input type="text" value="${sessionScope.start_time }"></input></td>
+							<td><input type="text" value="${sessionScope.start_time }" name="start_time"></input></td>
 							<td>冲洗速率：</td>
-							<td><input type="text" value="${sessionScope.rate }"></input></td>
+							<td><input type="text" value="${sessionScope.rate }" name="rate"></input></td>
 						</tr>
 						<tr>
 							<td>结束时间：</td>
-							<td><input type="text" value="${sessionScope.end_time }"></input></td>
+							<td><input type="text" value="${sessionScope.end_time }" name="end_time"></input></td>
 							<td>反应时间：</td>
-							<td><input type="text" value="${sessionScope.response_time_flush_nodes }"></input></td>
+							<td><input type="text" value="${sessionScope.response_time_flush_nodes }" name="response_time_flush_nodes"></input></td>
 						</tr>
 						<tr>
 							<td>TSG文件：</td>
-							<td><input type="text" value="${sessionScope.tsg_file }"></input></td>
+							<td><input type="text" value="${sessionScope.tsg_file }" name="tsg_file"></input></td>
 							<td>持续时间：</td>
-							<td><input type="text" value="${sessionScope.duration }"></input></td>
+							<td><input type="text" value="${sessionScope.duration }" name="duration"></input></td>
 						</tr>
 						<tr>
 							<td>TSI文件：</td>
-							<td><input type="text" value="${sessionScope.tsi_file }"></input></td>
+							<td><input type="text" value="${sessionScope.tsi_file }" name="tsi_file"></input></td>
 							<td class="catalogue" colspan="2">阀门关闭</td>
 						</tr>
 						<tr>
 							<td>MSX文件：</td>
-							<td><input type="text" value="${sessionScope.msx_file }"></input></td>
+							<td><input type="text" value="${sessionScope.msx_file }" name="msx_file"></input></td>
 							<td>可行管道：</td>
-							<td><input type="text" value="${sessionScope.feasible_pipes }"></input></td>
+							<td><input type="text" value="${sessionScope.feasible_pipes }" name="feasible_pipes"></input></td>
 						</tr>
 						<tr>
 							<td>MSX种类：</td>
-							<td><input type="text" value="${sessionScope.msx_species_scenario }"></input></td>
+							<td><input type="text" value="${sessionScope.msx_species_scenario }" name="msx_species_scenario"></input></td>
 							<td>不可行管道：</td>
-							<td><input type="text" value="${sessionScope.infeasible_pipes }"></input></td>
+							<td><input type="text" value="${sessionScope.infeasible_pipes }" name="infeasible_pipes"></input></td>
 						</tr>
 						<tr>
 							<td>merlion：</td>
-							<td><input type="text" value="${sessionScope.merlion }"></input></td>
+							<td><input type="text" value="${sessionScope.merlion }" name="merlion"></input></td>
 							<td>最大管道数：</td>
-							<td><input type="text" value="${sessionScope.max_pipes }"></input></td>
+							<td><input type="text" value="${sessionScope.max_pipes }" name="max_pipes"></input></td>
 						</tr>
 						<tr>
 							<td class="catalogue" colspan="2">影响</td>
 							<td>反应时间：</td>
-							<td><input type="text" value="${sessionScope.response_time_close_valves }"></input></td>
+							<td><input type="text" value="${sessionScope.response_time_close_valves }" name="response_time_close_valves"></input></td>
 						</tr>
 						<tr>
 							<td>erd文件：</td>
-							<td><input type="text" value="${sessionScope.erd_file }"></input></td>
+							<td><input type="text" value="${sessionScope.erd_file }" name="erd_file"></input></td>
 							<td colspan="2" class="catalogue">求解程序</td>
 						</tr>
 						<tr>
 							<td>度量标准：</td>
-							<td><input type="text" value="${sessionScope.metric }"></input></td>
+							<td><input type="text" value="${sessionScope.metric }" name="metric"></input></td>
 							<td>类型：</td>
-							<td><input type="text" value="${sessionScope.type_solver }"></input></td>
+							<td><input type="text" value="${sessionScope.type_solver }" name="type_solver"></input></td>
 						</tr>
 						<tr>
 							<td>tai文件：</td>
-							<td><input type="text" value="${sessionScope.tai_file }"></input></td>
+							<td><input type="text" value="${sessionScope.tai_file }" name="tai_file"></input></td>
 							<td>选项：</td>
-							<td><input type="text" value="${sessionScope.options }"></input></td>
+							<td><input type="text" value="${sessionScope.options }" name="options"></input></td>
 						</tr>
 						<tr>
 							<td>反应时间：</td>
-							<td><input type="text" value="${sessionScope.response_time_impact }"></input></td>
+							<td><input type="text" value="${sessionScope.response_time_impact }" name="response_time_impact"></input></td>
 							<td>记录文件：</td>
-							<td><input type="text" value="${sessionScope.logfile }"></input></td>
+							<td><input type="text" value="${sessionScope.logfile }" name="logfile"></input></td>
 						</tr>
 						<tr>
 							<td>检测阈值：</td>
-							<td><input type="text" value="${sessionScope.detection_limit }"></input></td>
+							<td><input type="text" value="${sessionScope.detection_limit }" name="detection_limit"></input></td>
 							<td>冗余：</td>
-							<td><input type="text" value="${sessionScope.verbose }"></input></td>
+							<td><input type="text" value="${sessionScope.verbose }" name="verbose"></input></td>
 						</tr>
 						<tr>
 							<td>检测置信度：</td>
-							<td><input type="text" value="${sessionScope.detection_confidence }"></input></td>
+							<td><input type="text" value="${sessionScope.detection_confidence }" name="detection_confidence"></input></td>
 							<%-- <td>起始节点：</td>
 							<td><input type="text" value="${sessionScope. }"></input></td> --%>
 						</tr>
 						<tr>
 							<td>MSX种类：</td>
-							<td><input type="text" value="${sessionScope.msx_species_impact }"></input></td>
+							<td><input type="text" value="${sessionScope.msx_species_impact }" name="msx_species_impact"></input></td>
 							<td colspan="2" class="catalogue">配置</td>
 						</tr>
 						<tr>
 							<td colspan="2" class="catalogue"></td>
 							<td>输出前缀：</td>
-							<td><input type="text" value="${sessionScope.output_prefix }"></input></td>
+							<td><input type="text" value="${sessionScope.output_prefix }" name="output_prefix"></input></td>
 						</tr>
 						<tr>
 							<td colspan="2" class="catalogue"></td>
 							<td>调试：</td>
-							<td><input type="text" value="${sessionScope.debug }"></input></td>
+							<td><input type="text" value="${sessionScope.debug }" name="debug"></input></td>
 						</tr>
 					</tbody>
 					</table>
@@ -383,7 +393,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<div class="degassing_edit table_set">
 			<form action="#" method="get" accept-charset="utf-8">
 					<table>
-					<caption>booster_mip</caption>
+					<caption>消毒增压参数设置</caption>
 					<tbody>
 						<tr>
 							<td  class="catalogue" colspan="2">管网模型</td>
@@ -391,118 +401,119 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						</tr>
 						<tr>
 							<td>epanet文件</td>
-							<td><input type="text"></input></td>
+							<td><input type="text" value="${sessionScope.epanet }"  name="epanet"></input></td>
 							<td>传感器节点编号：</td>
-							<td><input type="text"></input></td>
+							<td><input type="text" value="${sessionScope.detection_booster_mip}"  name="detection_booster_mip"></input></td>
 						</tr>
 						<tr>
 							<td class="catalogue" colspan="2">场景</td>
 							<td>模型格式：</td>
-							<td><input type="text"></input></td>
+							<td><input type="text" value="${sessionScope.model_type_booster_mip }" name="model_type_booster_mip"></input></td>
 						</tr>
 						<tr>
 							<td >位置：</td>
-							<td><input type="text"></input></td>
+							<td><input type="text" value="${sessionScope.location_scenario }" name="location_scenario"></input></td>
 							<td>模型类型：</td>
-							<td><input type="text"></input></td>
+							<td><input type="text" value="${sessionScope.model_type_booster_mip }" name="model_format_booster_mip"></input></td>
+						</tr>
+						<tr>
+							<td ></td>
+							<td></td>
+							<td>化学计量比率：</td>
+							<td><input type="text" value="${sessionScope.stoichiometric_ratio_booster_mip }" name="stoichiometric_ratio_booster_mip"></input></td>
 						</tr>
 						<tr>
 							<td>强度：</td>
-							<td><input type="text"></input></td>
+							<td><input type="text" value="${sessionScope.strength_scenario }" name="strength_scenario"></input></td>
 							<td>目标：</td>
-							<td><input type="text"></input></td>
+							<td><input type="text" value="${sessionScope.objective_booster_mip }" name="objective_booster_mip"></input></td>
 						</tr>
 						<tr>
 							<td>种类：</td>
-							<td><input type="text"></input></td>
+							<td><input type="text" value="${sessionScope.type_scenario }" name="type_scenario"></input></td>
 							<td>污染物衰减系数：</td>
-							<td><input type="text"></input></td>
+							<td><input type="text" value="${sessionScope.toxin_decay_coefficient_booster_mip }" name="toxin_decay_coefficient_booster_mip"></input></td>
 						</tr>
 						<tr>
 							<td>开始时间：</td>
-							<td><input type="text"></input></td>
+							<td><input type="text" value="${sessionScope.start_time_scenario }" name="start_time_scenario"></input></td>
 							<td>消毒剂衰减系数：</td>
-							<td><input type="text"></input></td>
+							<td><input type="text" value="${sessionScope.decon_decay_coefficient_booster_mip }" name="decon_decay_coefficient_booster_mip"></input></td>
 						</tr>
 						<tr>
 							<td>结束时间：</td>
-							<td><input type="text"></input></td>
+							<td><input type="text" value="${sessionScope.end_time_scenario }" name="end_time_scenario"></input></td>
 							<td>可行节点：</td>
-							<td><input type="text"></input></td>
+							<td><input type="text" value="${sessionScope.feasible_nodes_booster_mip }" name="feasible_nodes_booster_mip"></input></td>
 						</tr>
 						<tr>
-							<td>tag文件：</td>
-							<td><input type="text"></input></td>
+							<td>tsg文件：</td>
+							<td><input type="text" value="${sessionScope.tsg_file_scenario }" name="tsg_file_scenario"></input></td>
 							<td>不可行节点：</td>
-							<td><input type="text"></input></td>
+							<td><input type="text" value="${sessionScope.infeasible_nodes_booster_mip }" name="infeasible_nodes_booster_mip"></input></td>
+						</tr>
+						<tr>
+							<td>tsi文件：</td>
+							<td><input type="text" value="${sessionScope.tsi_file_scenario }" name="tsi_file_scenario"></input></td>
+							<td></td>
+							<td></td>
 						</tr>
 						<tr>
 							<td>msx文件：</td>
-							<td><input type="text"></input></td>
+							<td><input type="text" value="${sessionScope.msx_file_scenario }" name="msx_file_scenario"></input></td>
 							<td>固定节点：</td>
-							<td><input type="text"></input></td>
+							<td><input type="text" value="${sessionScope.fixed_nodes_booster_mip }" name="fixed_nodes_booster_mip"></input></td>
 						</tr>
 						<tr>
 							<td>msx种类：</td>
-							<td><input type="text"></input></td>
+							<td><input type="text" value="${sessionScope.msx_species_scenario }" name="msx_species_scenario"></input></td>
 							<td>增压磊站最大数：</td>
-							<td><input type="text"></input></td>
+							<td><input type="text" value="${sessionScope.max_boosters_booster_mip }" name="max_boosters_booster_mip"></input></td>
 						</tr>
 						<tr>
 							<td>merlion：</td>
-							<td><input type="text"></input></td>
+							<td><input type="text" value="${sessionScope.merlion_scenario }" name="merlion_scenario"></input></td>
 							<td>类型：</td>
-							<td><input type="text"></input></td>
+							<td><input type="text" value="${sessionScope.type_booster_mip_booster_mip }" name="type_booster_mip_booster_mip"></input></td>
 						</tr>
 						<tr>
 							<td class="catalogue" colspan="2">求解程序</td>
 							<td>强度：</td>
-							<td><input type="text"></input></td>
+							<td><input type="text" value="${sessionScope.strength_booster_mip }" name="strength_booster_mip"></input></td>
 						</tr>
 						<tr>
 							<td>类型：</td>
-							<td><input type="text"></input></td>
+							<td><input type="text" value="${sessionScope.type_solver }" name="type_solver"></input></td>
 							<td>反应时间：</td>
-							<td><input type="text"></input></td>
+							<td><input type="text" value="${sessionScope.response_time_booster_mip }" name="response_time_booster_mip"></input></td>
 						</tr>
 						<tr>
 							<td>选项：</td>
-							<td><input type="text"></input></td>
+							<td><input type="text" value="${sessionScope.options_solver }" name="options_solver"></input></td>
 							<td>持续时间：</td>
-							<td><input type="text"></input></td>
+							<td><input type="text" value="${sessionScope.duration_booster_mip }" name="duration_booster_mip"></input></td>
 						</tr>
 						<tr>
 							<td>记录文件：</td>
-							<td><input type="text"></input></td>
+							<td><input type="text" value="${sessionScope.logfile_solver }" name="logfile_solver"></input></td>
 							<td>评估：</td>
-							<td><input type="text"></input></td>
+							<td><input type="text" value="${sessionScope.evaluate_booster_mip }" name="evaluate_booster_mip"></input></td>
 						</tr>
 						<tr>
 							<td>冗余：</td>
-							<td><input type="text"></input></td>
+							<td><input type="text" value="${sessionScope.verbose_solver }" name="verbose_solver"></input></td>
 							<td colspan="2" class="catalogue">配置</td>
 						</tr>
 						<tr>
-							<td>起始节点：</td>
-							<td><input type="text"></input></td>
 							<td>输出前缀：</td>
-							<td><input type="text"></input></td>
+							<td><input type="text" value="${sessionScope.output_prefix_configure }" name="output_prefix_configure"></input></td>
 						</tr>
 						<tr>
 							<td colspan="2" class="catalogue"></td>
 							<td>调试：</td>
-							<td><input type="text"></input></td>
+							<td><input type="text" value="${sessionScope.debug_configure }" name="debug_configure"></input></td>
 						</tr>
-						<tr>
-							<td colspan="2" class="catalogue"></td>
-							<td>事件检测：</td>
-							<td><input type="text"></input></td>
-						</tr>
-						<tr>
-							<td colspan="2" class="catalogue"></td>
-							<td>增压磊站影响：</td>
-							<td><input type="text"></input></td>
-						</tr>
+					
 					</tbody>
 					</table>
 					<input id="submit" type="submit" value="提交"></input>
@@ -515,6 +526,46 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 
 <script type="text/javascript" src="Js/jquery.js"></script>
+<script type="text/javascript">
+//这是计时的程序
+
+	var sec =0;
+	var minu=0;
+	var hou=0;
+
+$('#degassing_count').click(function(){
+//每隔一秒刷新一次
+window.setTimeout("uupdate()",1000);
+});
+
+function uupdate()
+{
+    sec++;    
+    if(sec==60)
+    {
+        sec =0;
+        minu +=1;
+    }
+    if(minu==60)
+    {
+        minu=0;
+        hou+=1;
+    }
+    var ss04 =hou+ "时"+minu+"分"+sec+"秒";
+    document.getElementById('yy004').innerHTML=ss04;
+    window.setTimeout("uupdate()",1000);
+}
+
+</script>
+
+
+
+
+
+
+
+
+
 <script type="text/javascript">
 $(".leftsidebar_box dt").css({"background-color":"#e0edff"});
 $(".leftsidebar_box dt img").attr("src","images/left/select_xl01.png");
@@ -580,13 +631,6 @@ $(function(){
 		$('.degassing_edit').css({'display':'block'});
 	});
 	
-	$("#degassing_edit_a").click(function(){
-		$('.welcome').css({'display':'none'});
-		$('.sample_edit').css({'display':'none'});
-		$('.dispatch_edit').css({'display':'none'});
-		$('.polution_edit').css({'display':'none'});
-		$('.degassing_edit').css({'display':'block'});
-	});
 	
 	//取样点优化点击编辑
 	$("#sample_edit_a").click(function(){
@@ -634,29 +678,29 @@ $(function(){
 	});
 	
 	
-/* 	//消毒增压编辑
-	$("#sample_edit_a").click(function(){
+ 	//消毒增压编辑
+	$("#degassing_edit_a").click(function(){
 		
 		$('.welcome').css({'display':'none'});
-		$('.polution_edit').css({'display':'none'});
+		$('.sample_edit').css({'display':'none'});
 		$('.dispatch_edit').css({'display':'none'});
-		$('.degassing_edit').css({'display':'none'});
-		$('.sample_edit').css({'display':'block'}); 
+		$('.polution_edit').css({'display':'none'});
+		$('.degassing_edit').css({'display':'block'});
 		
 		 $.ajax({ 
-           url:  "http://localhost:8080/WST/readGrabsampleYaml.do", 
+           url:  "http://localhost:8080/WST/readBoosterYaml.do", 
            type:'post', 
            success: function(data){ 
            	alert("success");
            	
            },
            error: function(data){
-           	alert("取样点优化");
+           	alert("消毒增压");
            }
        }); 
 	});
 	
-	 */
+	
 	
 });
 </script>

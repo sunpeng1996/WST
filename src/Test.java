@@ -19,7 +19,7 @@ public class Test {
 					new File("f:/wst-1.2/bin"));*/	
 	//	excuteCommand(new String[]{"F:\\wst-1.2\\bin\\epanet.exe"});
 			long startTime=System.currentTimeMillis();   //获取开始时间
-		excuteCommand(new String[]{"G:\\wst-1.2\\bin\\wst.exe","grabsample","G:\\wst-1.2\\bin\\grabsample_ex1.yml"},
+		excuteCommand(new String[]{"G:\\wst-1.2\\bin\\wst.exe","flushing","G:\\wst-1.2\\bin\\flushing_ex2.yml"},
 				null,	new File("G:/wst-1.2/bin"));
 		
 		long endTime=System.currentTimeMillis(); //获取结束时间
