@@ -14,7 +14,7 @@ public class Test3 {
 	public static void main(String[] args) {
 		try {
 			long startTime=System.currentTimeMillis();   //获取开始时间
-			excuteCommand(new String[]{"G:\\wst-1.2\\bin\\wst.exe","grabsample ","G:\\wst-1.2\\bin\\grabsample_ex1.yml"},
+			excuteCommand(new String[]{"G:\\wst-1.2\\bin\\wst.exe","grabsample","G:\\wst-1.2\\bin\\grabsample_ex1.yml"},
 					null,new File("G:/wst-1.2/bin"));
 			
 			long endTime=System.currentTimeMillis(); //获取结束时间

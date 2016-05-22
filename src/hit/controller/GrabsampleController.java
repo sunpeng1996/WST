@@ -171,7 +171,7 @@ public class GrabsampleController extends AbstractController {
 	public String Inversion(HttpServletRequest request){
 		System.out.println("执行取样点优化的方法呢");
 		long startTime=System.currentTimeMillis();   //获取开始时间
-		CommandUtils.excuteCommand(new String[]{"G:\\wst-1.2\\bin\\wst.exe","grabsample ","G:\\wst-1.2\\bin\\grabsample_ex1.yml"},
+		CommandUtils.excuteCommand(new String[]{"G:\\wst-1.2\\bin\\wst.exe","grabsample","G:\\wst-1.2\\bin\\grabsample_ex1.yml"},
 							null,	new File("G:/wst-1.2/bin"));
 		long endTime=System.currentTimeMillis(); //获取结束时间
 		long totalTime = endTime-startTime;
