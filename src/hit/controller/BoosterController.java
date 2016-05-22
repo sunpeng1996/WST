@@ -4,7 +4,7 @@ package hit.controller;
  * 消毒增压控制器
  */
 import hit.util.CommandUtils;
-import hit.util.modifyYml;
+import hit.util.modifyYml4;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -16,7 +16,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.ho.yaml.Yaml;
-import org.junit.Test;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -93,7 +92,7 @@ public class BoosterController extends AbstractController {
 	        
 	        
 	        Date date = new Date();
-	        System.out.println("阀门调度文件已经取出"+date.toString());
+	        System.out.println("消毒增压文件已经取出"+date.toString());
 			return null;
         
 		
@@ -130,7 +129,7 @@ public class BoosterController extends AbstractController {
 	        HashMap scenario = (HashMap) ml.get("scenario");
 	        HashMap solver = (HashMap) ml.get("solver");
 	        HashMap configure = (HashMap) ml.get("configure");
-	        
+	        System.out.println(booster_mip.get("detection_booster_mip")+"传感器节点编号" + detection_booster_mip);
 	        booster_mip.replace("detection", booster_mip.get("detection"), detection_booster_mip);
 	        booster_mip.replace("model type", booster_mip.get("model type"), model_type_booster_mip);
 	        booster_mip.replace("model format", booster_mip.get("model format"), model_format_booster_mip);
@@ -173,11 +172,13 @@ public class BoosterController extends AbstractController {
 		
 	        Yaml yaml = new Yaml();
 	        yaml.dump(ml, new File("G:/wst-1.2/bin/booster_mip_ex1.yml"), false);
-	        modifyYml.modifyFile("G:/wst-1.2/bin/booster_mip_ex1.yml");
+	        modifyYml4.modifyFile("G:/wst-1.2/bin/booster_mip_ex1.yml");
 	        System.out.println("文件已经更改完成");
+	        
+	        //第二次，修改session中的数据
 	        readYaml(request);
 		
-	        return null;
+	        return "index";
 		
 	}
 	

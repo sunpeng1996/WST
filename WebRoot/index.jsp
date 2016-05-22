@@ -391,7 +391,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</form>
 		</div>
 		<div class="degassing_edit table_set">
-			<form action="#" method="get" accept-charset="utf-8">
+			<form action="<%=path %>/saveBoosterYAML.do" method="post" accept-charset="utf-8">
 					<table>
 					<caption>消毒增压参数设置</caption>
 					<tbody>
@@ -408,13 +408,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<tr>
 							<td class="catalogue" colspan="2">场景</td>
 							<td>模型格式：</td>
-							<td><input type="text" value="${sessionScope.model_type_booster_mip }" name="model_type_booster_mip"></input></td>
+							<td><input type="text" value="${sessionScope.model_format_booster_mip }" name="model_format_booster_mip"></input></td>
 						</tr>
 						<tr>
 							<td >位置：</td>
 							<td><input type="text" value="${sessionScope.location_scenario }" name="location_scenario"></input></td>
 							<td>模型类型：</td>
-							<td><input type="text" value="${sessionScope.model_type_booster_mip }" name="model_format_booster_mip"></input></td>
+							<td><input type="text" value="${sessionScope.model_type_booster_mip }" name="model_type_booster_mip"></input></td>
 						</tr>
 						<tr>
 							<td ></td>

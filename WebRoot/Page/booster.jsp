@@ -36,7 +36,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   	response.reset();
 	response.setContentType("text/html ");
 	OutputStream output = response.getOutputStream();// 得到输出流  
-	File file = new File("G:\\wst-1.2\\bin\\booster\\Net3_1visualization_output.html");// 文件流  
+	File file = new File("G:\\wst-1.2\\bin\\booster_mip_ex1\\Net3_1visualization_output.html");// 文件流  
 	BufferedInputStream bis = new BufferedInputStream(new FileInputStream(file));// 输入缓冲流  
 	BufferedOutputStream bos = new BufferedOutputStream(output);// 输出缓冲流  
 	byte data[] = new byte[2048];// 缓冲字节数  

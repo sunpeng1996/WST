@@ -1,10 +1,10 @@
 package hit.controller;
 /**
  * @author sunpeng123
- *阀门调度控制器
+ *阀门调度控制器3
  */
 import hit.util.CommandUtils;
-import hit.util.modifyYml;
+import hit.util.modifyYml3;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -17,7 +17,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.ho.yaml.Yaml;
-import org.junit.Test;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -67,6 +66,7 @@ public class FlushingController extends AbstractController {
 	        request.getSession().setAttribute("msx_file", scenario.get("msx file"));
 	        request.getSession().setAttribute("msx_species", scenario.get("msx species"));
 	        request.getSession().setAttribute("merlion", scenario.get("merlion"));
+	        request.getSession().setAttribute("msx_species_scenario", scenario.get("msx species"));
 
 	        
 	        
@@ -76,8 +76,7 @@ public class FlushingController extends AbstractController {
 	        request.getSession().setAttribute("response_time_impact", impact.get("response time"));
 	        request.getSession().setAttribute("detection_limit", impact.get("detection limit"));
 	        request.getSession().setAttribute("detection_confidence", impact.get("detection confidence"));
-	        request.getSession().setAttribute("msx_species", impact.get("msx species"));
-	        
+	        request.getSession().setAttribute("msx_species_impact", impact.get("msx species"));
 	        
 	        request.getSession().setAttribute("detection", flushing.get("detection"));
 	        HashMap flush_nodes = (HashMap) flushing.get("flush nodes");
@@ -199,7 +198,7 @@ public class FlushingController extends AbstractController {
 	        
 	        Yaml yaml = new Yaml();
 	        yaml.dump(ml, new File("G:\\wst-1.2\\bin\\flushing_ex2.yml"), false);
-	        modifyYml.modifyFile("G:\\wst-1.2\\bin\\flushing_ex2.yml");
+	        modifyYml3.modifyFile("G:\\wst-1.2\\bin\\flushing_ex2.yml");
 	        System.out.println("文件已经更改完成");
 	        
 	        

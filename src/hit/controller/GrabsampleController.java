@@ -3,7 +3,8 @@ package hit.controller;
  * 取样点优化
  */
 import hit.util.CommandUtils;
-import hit.util.modifyYml;
+import hit.util.modifyYml1;
+import hit.util.modifyYml2;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -148,58 +149,11 @@ public class GrabsampleController extends AbstractController {
 		        
 		        Yaml yaml = new Yaml();
 		        yaml.dump(ml, new File("G:\\wst-1.2\\bin\\grabsample_ex1.yml"), false);
-		        modifyYml.modifyFile("G:\\wst-1.2\\bin\\grabsample_ex1.yml");
+		        modifyYml2.modifyFile("G:\\wst-1.2\\bin\\grabsample_ex1.yml");
 		        System.out.println("文件已经更改完成");
 		        
-		        
-		        
-		        
-		        
 		        //第二次重复操作，目的是更新session的数据
-		        File f2 = new File("G:/wst-1.2/bin/grabsample_ex1.yml");
-				 System.out.println(f.getAbsolutePath());
-				 HashMap ml2 = Yaml.loadType(new FileInputStream(f.getAbsolutePath()), HashMap.class);
-			     System.out.println(ml2.size());        
-			        //System.out.println();
-			        HashMap grabsample2 = (HashMap) ml2.get("grabsample");
-			        HashMap network2 = (HashMap) ml2.get("network");
-			        HashMap scenario2 = (HashMap) ml2.get("scenario");
-			        HashMap solver2 = (HashMap) ml2.get("solver");
-			        HashMap configure2 = (HashMap) ml2.get("configure");
-			        
-			        request.getSession().setAttribute("epanet", network2.get("epanet file"));//EPANET管网模型
-			        System.out.println(network2.get("epanet file"));
-			        
-			        request.getSession().setAttribute("location", scenario2.get("location"));
-			        request.getSession().setAttribute("type", scenario2.get("type"));
-			        request.getSession().setAttribute("strength", scenario2.get("strength"));
-			        request.getSession().setAttribute("species", scenario2.get("species"));
-			        request.getSession().setAttribute("start_time", scenario2.get("start time"));
-			        request.getSession().setAttribute("end_time", scenario2.get("end time"));
-			        request.getSession().setAttribute("tsg_file", scenario2.get("tsg file"));
-			        request.getSession().setAttribute("tsi_file", scenario2.get("tsi file"));
-			        request.getSession().setAttribute("msx_file", scenario2.get("msx file"));
-			        request.getSession().setAttribute("msx_species", scenario2.get("msx species"));
-			        request.getSession().setAttribute("merlion", scenario2.get("merlion"));
-			        
-			        
-			        request.getSession().setAttribute("model_format", grabsample2.get("model format"));
-			        request.getSession().setAttribute("sample_time", grabsample2.get("sample time"));
-			        request.getSession().setAttribute("threshold", grabsample2.get("threshold"));
-			        request.getSession().setAttribute("fixed_sensors", grabsample2.get("fixed sensors"));
-			        request.getSession().setAttribute("feasible_nodes", grabsample2.get("feasible nodes"));
-			        request.getSession().setAttribute("num_samples", grabsample2.get("num samples"));
-			        request.getSession().setAttribute("greedy_selection", grabsample2.get("greedy selection"));
-			        
-			        request.getSession().setAttribute("type_qiujiechengxu", solver2.get("type"));
-			        request.getSession().setAttribute("options", solver2.get("options"));
-			        request.getSession().setAttribute("logfile", solver2.get("logfile"));
-			        request.getSession().setAttribute("verbose", solver2.get("verbose"));
-			        request.getSession().setAttribute("initial_points", solver2.get("initial points"));
-			        
-			        
-			        request.getSession().setAttribute("output_prefix", configure2.get("output prefix"));
-			        request.getSession().setAttribute("debug", configure2.get("debug"));
+		       readYaml(request);
 			        
 		        System.out.println("取样点优化，修改成功");
 		        return "index";

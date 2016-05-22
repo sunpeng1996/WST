@@ -20,11 +20,11 @@ import org.junit.Assert;
 import org.junit.Test;
 
 
-public class TextYml {
+public class TextYml4 {
 
 	public static void main(String[] args) throws FileNotFoundException {
 		// TODO Auto-generated method stub
-		TextYml t = new TextYml();        
+		TextYml4 t = new TextYml4();        
     //    t.getYamlFile();
 	}
 	public void getTest() {
@@ -43,21 +43,22 @@ public class TextYml {
 	 */
 	@Test
 	  public void getYamlFile() throws IOException{    
-	        File f = new File("G:/wst-1.2/bin/booster_mip_ex1.yml");
-	        System.out.println(f.getAbsolutePath());
-	        HashMap ml = Yaml.loadType(new FileInputStream(f.getAbsolutePath()), HashMap.class);
-	        System.out.println(ml.size());        
+		File f = new File("G:/wst-1.2/bin/booster_mip_ex1.yml");
+		 System.out.println(f.getAbsolutePath());
+		 HashMap ml = Yaml.loadType(new FileInputStream(f.getAbsolutePath()), HashMap.class);
+	     System.out.println(ml.size());        
+	     
+       HashMap booster_mip = (HashMap) ml.get("booster mip");
+       HashMap network = (HashMap) ml.get("network");
+       HashMap scenario = (HashMap) ml.get("scenario");
+       HashMap solver = (HashMap) ml.get("solver");
+       HashMap configure = (HashMap) ml.get("configure");
 	        
-	        HashMap booster = (HashMap) ml.get("booster mip");
-	       // object.replace("sample time", object.get("sample time"), 13131312);
-	        HashMap scenario = (HashMap) ml.get("scenario");
-	        System.out.println(booster.get("detection"));
-	        System.out.println(booster.get("max boosters"));
+       System.out.println(booster_mip.get("detection"));;
 	        System.out.println(scenario.get("location"));
-	        
-	        
+	        System.out.println(booster_mip.get("max boosters"));
 	       // booster.replace("detection", booster.get("detection"), "['15', '35','11111111111', '219', '253']");
-	        scenario.replace("start time", scenario.get("start time"),  20);
+	//      scenario.replace("start time", scenario.get("start time"),  20);
 	        Yaml yaml = new Yaml();
 	        
 	        yaml.dump(ml, new File("G:/wst-1.2/bin/booster_mip_ex1.yml"), false);

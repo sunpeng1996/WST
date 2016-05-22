@@ -1,10 +1,11 @@
 package hit.controller;
 /**
  * @author sunpeng123
+ * 第一个
  * 污染源定位的controller
  */
 import hit.util.CommandUtils;
-import hit.util.modifyYml;
+import hit.util.modifyYml1;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -89,7 +90,7 @@ public class InversionController extends AbstractController {
 	        
 	        request.getSession().setAttribute("output_prefix", configure.get("output prefix"));
 	        request.getSession().setAttribute("debug", configure.get("debug"));
-	        System.out.println("污染源定位----------dasdadadada");
+	        System.out.println("污染源定位文件解析完毕----------dasdadadada");
 	        
 	        
 	        
@@ -121,6 +122,7 @@ public class InversionController extends AbstractController {
 		 	File f = new File("G:\\wst-1.2\\bin\\inversion_ex1.yml");
 	        System.out.println(f.getAbsolutePath());
 	        HashMap ml = Yaml.loadType(new FileInputStream(f.getAbsolutePath()), HashMap.class);
+	      /*  modifyYml1.modifyFile("G:\\wst-1.2\\bin\\inversion_ex1.yml");*/
 	        System.out.println(ml.size());        
 	        //System.out.println();
 	        HashMap network = (HashMap) ml.get("network");
@@ -158,53 +160,11 @@ public class InversionController extends AbstractController {
 	        
 	        Yaml yaml = new Yaml();
 	        yaml.dump(ml, new File("G:\\wst-1.2\\bin\\inversion_ex1.yml"), false);
-	        modifyYml.modifyFile("G:\\wst-1.2\\bin\\inversion_ex1.yml");
+	        modifyYml1.modifyFile("G:\\wst-1.2\\bin\\inversion_ex1.yml");
 	        System.out.println("文件已经更改完成");
 	        
 	        //第二次重复操作，目的是更新session的数据
-	        File f1 = new File("G:/wst-1.2/bin/inversion_ex1.yml");
-			 System.out.println(f.getAbsolutePath());
-			 HashMap ml1 = Yaml.loadType(new FileInputStream(f.getAbsolutePath()), HashMap.class);
-		     System.out.println(ml.size());        
-		        //System.out.println();
-		        HashMap network1 = (HashMap) ml.get("network");
-		        HashMap measurements1 = (HashMap) ml.get("measurements");
-		        HashMap inversion1 = (HashMap) ml.get("inversion");
-		        HashMap solver1 = (HashMap) ml.get("solver");
-		        HashMap configure1 = (HashMap) ml.get("configure");
-		        
-		        
-		        
-		        request.getSession().setAttribute("epanet", network1.get("epanet file"));//EPANET管网模型
-		        System.out.println(network.get("epanet file"));
-		        
-		        request.getSession().setAttribute("grab_samples", measurements1.get("grab samples"));
-		        
-		        
-		        request.getSession().setAttribute("algorithm", inversion1.get("algorithm"));
-		        request.getSession().setAttribute("horizon", inversion1.get("horizon"));
-		        request.getSession().setAttribute("formulation", inversion1.get("formulation"));
-		        request.getSession().setAttribute("model_format", inversion1.get("model format"));
-		        request.getSession().setAttribute("num_injections", inversion1.get("num injections"));
-		        request.getSession().setAttribute("measurement_failure", inversion1.get("measurement failure"));
-		        request.getSession().setAttribute("positive_threshold", inversion1.get("positive threshold"));
-		        request.getSession().setAttribute("negative_threshold", inversion1.get("negative threshold"));
-		        request.getSession().setAttribute("feasible_nodes", inversion1.get("feasible nodes"));
-		        request.getSession().setAttribute("candidate_threshold", inversion1.get("candidate threshold"));
-		        request.getSession().setAttribute("confidence", inversion1.get("confidence"));
-		        request.getSession().setAttribute("output_impact_nodes", inversion1.get("output impact nodes"));
-		   
-		        
-		        request.getSession().setAttribute("type", solver1.get("type"));
-		        request.getSession().setAttribute("options", solver1.get("options"));
-		        request.getSession().setAttribute("logfile", solver1.get("logfile"));
-		        request.getSession().setAttribute("verbose", solver1.get("verbose"));
-		        request.getSession().setAttribute("initial_points", solver1.get("initial points"));
-		        
-		        
-		        request.getSession().setAttribute("output_prefix", configure1.get("output prefix"));
-		        request.getSession().setAttribute("debug", configure1.get("debug"));
-		        System.out.println("----------dasdadadada");
+	        readYaml(request);
 	        
 	        
 	        return "index";
