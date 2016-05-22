@@ -44,7 +44,7 @@ public class FlushingController extends AbstractController {
 		 System.out.println(f.getAbsolutePath());
 		 HashMap ml = Yaml.loadType(new FileInputStream(f.getAbsolutePath()), HashMap.class);
 	     System.out.println(ml.size());        
-	        //System.out.println();
+	     
 	        HashMap network = (HashMap) ml.get("network");
 	        HashMap scenario = (HashMap) ml.get("scenario");
 	        HashMap flushing = (HashMap) ml.get("flushing");

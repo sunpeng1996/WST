@@ -54,33 +54,44 @@ public class modifyYml3 {
 		 
 		   for(int j=0;j<list.size()-1;j++){
 		    //使用循环把行字符串取出来,并调用replaceall函数,对字符内容进行正则表达式替换
-		    s=list.get(j);
-		   
-		    if(s.contains("!java.util.HashMap")){
-		    	String new_s = s.replace("!java.util.HashMap", "");
-		    	File_bak.write(new_s+"\n");
-		    }else if(s.contains("--- ")) {
-		    	String new_s = s.replace("---", "");
-				File_bak.write(new_s+"\n");
-			}else if (s.contains("\"") && (!s.contains("["))) {//包含" 不包含【  去除
-				String new_s = s.replace("\"", "");
-				File_bak.write(new_s+"\n");
-			}else if (s.contains("\'") && s.contains("[")) { //包含' 包含[  不变
-				File_bak.write(s+"\n");
-			}/*else if (s.contains("\"" &&)){
-				
-			}*/
-		    //[2, 4, 6, 8, 10]
-			else if (s.contains("!java.lang.Double")) {
-				String new_s = s.replace("!java.lang.Double", "");
-				File_bak.write(new_s+"\n");
-			}
-			else {
-				File_bak.write(s+"\n");
-			}
-		    
-		    
+				    s=list.get(j);
+				   
+				    if(s.contains("!java.util.HashMap")){
+				    	String new_s = s.replace("!java.util.HashMap", "");
+				    	File_bak.write(new_s+"\n");
+				    }else if (s.contains("location")) {//位置
+						String new_s = s.replace("\"", "");
+						File_bak.write(new_s+"\n");
+					}
+				    else if (s.contains("detection limit")) {
+						String new_s = s.replace("\"", "");
+						File_bak.write(new_s+"\n");
+					}else if (s.contains("metric")) {
+						String new_s = s.replace("\"", "");
+						File_bak.write(new_s+"\n");
+					}else if (s.contains("detection:")) {
+						String new_s = s.replace("\"", "");
+						File_bak.write(new_s+"\n");
+					}
+				    else if(s.contains("--- ")) {
+				    	String new_s = s.replace("---", "");
+						File_bak.write(new_s+"\n");
+					}else if (s.contains("\"") && (!s.contains("["))) {//包含" 不包含【  去除
+						String new_s = s.replace("\"", "");
+						File_bak.write(new_s+"\n");
+					}else if (s.contains("\'") && s.contains("[")) { //包含' 包含[  不变
+						File_bak.write(s+"\n");
+					}
+					else if (s.contains("!java.lang.Double")) {
+						String new_s = s.replace("!java.lang.Double", "");
+						File_bak.write(new_s+"\n");
+					}
+					else {
+						File_bak.write(s+"\n");
+					}
+				    
 		   }
+		 	    
 		   //必须先刷新,才能用close关闭
 		   File_bak.flush();
 		   File_bak.close();

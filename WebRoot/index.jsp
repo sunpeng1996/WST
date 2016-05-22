@@ -246,7 +246,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</form>
 		</div>
 		<div class="dispatch_edit table_set">
-			<form action="<%=path %>/saveFlushingYAML.do" method="get" accept-charset="utf-8">
+			<form action="<%=path %>/saveFlushingYAML.do" method="post" accept-charset="utf-8">
 					<table>
 					<caption>阀门调度</caption>
 					<tbody>
