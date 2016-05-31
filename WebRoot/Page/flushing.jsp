@@ -33,10 +33,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
      <%
+     
+     String tiaozhuanweizhi3 = (String)request.getSession().getAttribute("tiaozhuanweizhi3");
+     String buff[] = tiaozhuanweizhi3.split("/");
+     String location = buff[0];
+     String prefix = buff[1];
+     
   	response.reset();
 	response.setContentType("text/html ");
 	OutputStream output = response.getOutputStream();// 得到输出流  
-	File file = new File("G:\\wst-1.2\\bin\\flushing_ex2\\Net3visualization_output.html");// 文件流  
+	File file = new File("G:\\wst-1.2\\bin\\"+ location+"\\" + prefix+"visualization_output.html");// 文件流  
 	BufferedInputStream bis = new BufferedInputStream(new FileInputStream(file));// 输入缓冲流  
 	BufferedOutputStream bos = new BufferedOutputStream(output);// 输出缓冲流  
 	byte data[] = new byte[2048];// 缓冲字节数  

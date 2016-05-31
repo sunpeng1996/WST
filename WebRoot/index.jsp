@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -53,31 +54,68 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<img src="images/welcome.jpg" alt="welcome_logo">
 		<span>供水管网水质预警系统</span>
 	</div>
-		<div class="polution_edit table_set">
+		<div class="polution_edit table_set" id="polution_edit_table_set">
 				<form action="<%=path %>/saveInversionYAML.do" method="post" accept-charset="utf-8" >
 					<table>
 					<caption>污染源定位参数设置</caption>
 					<tbody>
 						<tr>
 							<td  class="catalogue" colspan="2">管网模型</td>
-							<td class="catalogue" colspan="2">反馈</td>
+							<td class="catalogue" colspan="2">反演</td>
 						</tr>
 						<tr>
 							<td>EPANET管网模型：</td>
 							<td><input type="text" value="${sessionScope.epanet }" name="epanet"></input></td>
 							<td>模型：</td>
-							<td><input type="text" value="${sessionScope.algorithm } " name="algorithm"></input></td>
+							<td>
+								<div name="algorithm" value="${sessionScope.algorithm }" >
+										  <select>
+						<option value="0" >-请选择-</option> 				  
+		  <option value="optimization" <c:if test="${sessionScope.algorithm == 'optimization' }">selected</c:if>>optimization</option>
+		  <option value="bayesian" <c:if test="${sessionScope.algorithm == 'bayesian' }">selected</c:if>>bayesian</option>
+		  <option value="csa" <c:if test="${sessionScope.algorithm == 'csa' }">selected</c:if>>csa</option>
+										  		
+										  </select>
+								</div>
+							</td>
+							<%-- <td><input type="text" value="${sessionScope.algorithm } " name="algorithm"></input></td> --%>
 						</tr>
 						<tr>
 							<td class="catalogue" colspan="2">监测数据</td>
 							<td>注入类型：</td>
-							<td><input type="text" value="${sessionScope.formulation }" name="formulation"></input></td>
+							<td>
+							<div name="formulation" value="${sessionScope.formulation }" >
+							<select>
+			<option value="0" >-请选择-</option> 
+										  
+		  <option value="LP_discrete" <c:if test="${sessionScope.formulation == 'LP_discrete' }">selected</c:if>>LP_discrete</option>
+		  <option value="MIP_discrete" <c:if test="${sessionScope.formulation == 'MIP_discrete' }">selected</c:if>>MIP_discrete</option>
+		  <option value="MIP_discrete_nd" <c:if test="${sessionScope.formulation == 'MIP_discrete_nd' }">selected</c:if>>MIP_discrete_nd</option>
+		  <option value="MIP_discrete_step" <c:if test="${sessionScope.formulation == 'MIP_discrete_step' }">selected</c:if>>MIP_discrete_step</option>
+										  		
+								  </select>
+								</div>
+								</td>
+							<%-- <td><input type="text" value="${sessionScope.formulation }" name="formulation"></input></td> --%>
 						</tr>
 						<tr>
 							<td >取样数据：</td>
 							<td><input type="text" value="${sessionScope.grab_samples}" name="grab_samples"></input></td>
 							<td>模型格式：</td>
-							<td><input type="text" value="${sessionScope.model_format}" name="model_format"></input></td>
+							<td>
+							<div name="model_format" value="${sessionScope.model_format }" >
+							<select>
+			<option value="0" >-请选择-</option> 
+										  
+<option value="AMPL" <c:if test="${sessionScope.model_format == 'AMPL' }">selected</c:if>>AMPL</option>
+<option value="PYOMO" <c:if test="${sessionScope.model_format == 'PYOMO' }">selected</c:if>>PYOMO</option>
+										  		
+								  </select>
+								</div>
+								</td>
+							
+							
+							<%-- <td><input type="text" value="${sessionScope.model_format}" name="model_format"></input></td> --%>
 						</tr> 
 						<tr>
 							<td class="catalogue" colspan="2">求解程序</td>
@@ -152,7 +190,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<td>epanet文件</td>
 							<td><input type="text" value="${sessionScope.epanet } "  name="epanet"></input></td>
 							<td>模型格式：</td>
-							<td><input type="text" value="${sessionScope.model_format }" name="model_format"></input></td>
+							<%-- <td><input type="text" value="${sessionScope.model_format }" name="model_format"></input></td> --%>
+					<td>
+							<div name="model_format" value="${sessionScope.model_format }" >
+							<select>
+								<option value="0" >-请选择-</option> 
+								<option value="AMPL" <c:if test="${sessionScope.model_format == 'AMPL' }">selected</c:if>>AMPL</option>
+								<option value="PYOMO" <c:if test="${sessionScope.model_format == 'PYOMO' }">selected</c:if>>PYOMO</option>
+												  		
+						 </select>
+							</div>
+				</td>
+					
 						</tr>
 						<tr>
 							<td class="catalogue" colspan="2" >场景</td>
@@ -168,7 +217,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<tr>
 							<!-- <td class="catalogue" colspan="2">类型：</td> -->
 							<td>类型：</td>
-							<td><input type="text" value="${sessionScope.type_changjing}" name="type_changjing"></input></td>
+							<%-- <td><input type="text" value="${sessionScope.type_changjing}" name="type_changjing"></input></td> --%>
+								<td>
+							<div name="type_changjing" value="${sessionScope.type_changjing }" >
+							<select>
+						<option value="0" >-请选择-</option> 
+			<option value="null" <c:if test="${sessionScope.type_changjing == 'null' }">selected</c:if>>null</option>
+			<option value="MASS" <c:if test="${sessionScope.type_changjing == 'AMPL' }">selected</c:if>>MASS</option>
+			<option value="CONCEN" <c:if test="${sessionScope.type_changjing == 'CONCEN' }">selected</c:if>>CONCEN</option>
+			<option value="FLOWPACED" <c:if test="${sessionScope.type_changjing == 'FLOWPACED' }">selected</c:if>>FLOWPACED</option>
+			<option value="SETPOINT" <c:if test="${sessionScope.type_changjing == 'SETPOINT' }">selected</c:if>>SETPOINT</option>
+										  		
+								  </select>
+								</div>
+								</td>
+							
 							<td>传感器节点：</td>
 							<td><input type="text" value="${sessionScope.fixed_sensors }" name="fixed_sensors"></input></td>
 						</tr>
@@ -257,15 +320,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<tr>
 							<td>epanet文件</td>
 							<td><input type="text" value="${sessionScope.epanet }" name="epanet"></input></td>
-							<td>传感器节点编号：</td>
-							<td><input type="text" value="${sessionScope.detection }" name="detection"></input></td>
+							<td>传感器节点编号：('')</td>
+							<!-- <textarea  onfocus="bigger(this);" onblur="smaller(this);"></textarea> -->
+						<!-- 	<td>
+									<textarea  contenteditable="true"  name="detection" onfocus="bigger(this);" onblur="smaller(this);"></textarea>
+							</td> -->
+							<td>
+							<input type="text" value="${sessionScope.detection }" name="detection"></input></td>
 						</tr>
 						<tr>
 							<td class="catalogue" colspan="2">场景</td>
 							<td class="catalogue" colspan="2">冲洗节点</td>
 						</tr>
 						<tr>
-							<td >位置：</td>
+							<td >位置：('')</td>
 							<td><input type="text" value="${sessionScope.location }" name="location"></input></td>
 							<td>可行节点：</td>
 							<td><input type="text" value="${sessionScope.feasible_nodes }" name="feasible_nodes"></input></td>
@@ -408,13 +476,34 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<tr>
 							<td class="catalogue" colspan="2">场景</td>
 							<td>模型格式：</td>
-							<td><input type="text" value="${sessionScope.model_format_booster_mip }" name="model_format_booster_mip"></input></td>
+							<td>
+							<div name="model_format_booster_mip" value="${sessionScope.model_format_booster_mip }" >
+							<select>
+			<option value="0" >-请选择-</option> 
+		  <option value="AMPL" <c:if test="${sessionScope.model_format_booster_mip == 'AMPL' }">selected</c:if>>AMPL</option>
+		  <option value="PYOMO" <c:if test="${sessionScope.model_format_booster_mip == 'PYOMO' }">selected</c:if>>PYOMO</option>
+						  </select>
+								</div>
+								</td>
+							
+							<%-- <td><input type="text" value="${sessionScope.model_format_booster_mip }" name="model_format_booster_mip"></input></td> --%>
 						</tr>
 						<tr>
 							<td >位置：</td>
 							<td><input type="text" value="${sessionScope.location_scenario }" name="location_scenario"></input></td>
 							<td>模型类型：</td>
-							<td><input type="text" value="${sessionScope.model_type_booster_mip }" name="model_type_booster_mip"></input></td>
+							<td>
+							<div name="model_type_booster_mip" value="${sessionScope.model_type_booster_mip }" >
+							<select>
+			<option value="0" >-请选择-</option> 
+		  <option value="NEUTRAL" <c:if test="${sessionScope.model_type_booster_mip == 'NEUTRAL' }">selected</c:if>>NEUTRAL</option>
+		  <option value="LIMIT" <c:if test="${sessionScope.model_type_booster_mip == 'LIMIT' }">selected</c:if>>LIMIT</option>
+						  </select>
+								</div>
+								</td>
+							
+							
+						<%-- 	<td><input type="text" value="${sessionScope.model_type_booster_mip }" name="model_type_booster_mip"></input></td> --%>
 						</tr>
 						<tr>
 							<td ></td>
@@ -429,8 +518,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<td><input type="text" value="${sessionScope.objective_booster_mip }" name="objective_booster_mip"></input></td>
 						</tr>
 						<tr>
-							<td>种类：</td>
-							<td><input type="text" value="${sessionScope.type_scenario }" name="type_scenario"></input></td>
+							<td>类型：</td>
+							<td>
+							<div name="type_scenario" value="${sessionScope.type_scenario }" >
+							<select>
+				<option value="0" >-请选择-</option> 
+			  <option value="MASS" <c:if test="${sessionScope.type_scenario == 'MASS' }">selected</c:if>>MASS</option>
+			  <option value="FLOWPACED" <c:if test="${sessionScope.type_scenario == 'FLOWPACED' }">selected</c:if>>FLOWPACED</option>
+			  <option value="CONCEN" <c:if test="${sessionScope.type_scenario == 'CONCEN' }">selected</c:if>>CONCEN</option>
+			  <option value="SETPOINT" <c:if test="${sessionScope.type_scenario == 'SETPOINT' }">selected</c:if>>SETPOINT</option>
+						  </select>
+								</div>
+								</td>
+							
+							<%-- <td><input type="text" value="${sessionScope.type_scenario }" name="type_scenario"></input></td> --%>
 							<td>污染物衰减系数：</td>
 							<td><input type="text" value="${sessionScope.toxin_decay_coefficient_booster_mip }" name="toxin_decay_coefficient_booster_mip"></input></td>
 						</tr>
@@ -474,7 +575,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<td>merlion：</td>
 							<td><input type="text" value="${sessionScope.merlion_scenario }" name="merlion_scenario"></input></td>
 							<td>类型：</td>
-							<td><input type="text" value="${sessionScope.type_booster_mip_booster_mip }" name="type_booster_mip_booster_mip"></input></td>
+							<td>
+							<div name="type_booster_mip_booster_mip" value="${sessionScope.type_booster_mip_booster_mip }" >
+							<select>
+								<option value="0" >-请选择-</option> 
+							  <option value="MASS" <c:if test="${sessionScope.type_booster_mip_booster_mip  eq  'MASS' }">selected</c:if>>MASS</option>
+							  <option value="FLOWPACED" <c:if test="${sessionScope.type_booster_mip_booster_mip eq  'FLOWPACED' }">selected</c:if>>FLOWPACED</option>
+						  </select>
+								</div>
+								</td>
+							
+							
+						<%-- 	<td><input type="text" value="${sessionScope.type_booster_mip_booster_mip }" name="type_booster_mip_booster_mip"></input></td> --%>
 						</tr>
 						<tr>
 							<td class="catalogue" colspan="2">求解程序</td>
@@ -526,6 +638,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 
 <script type="text/javascript" src="Js/jquery.js"></script>
+<script type="text/javascript">
+	var objWidth,objHeight;
+		function bigger(obj) {
+			objWidth = obj.style.width;
+			objHeight = obj.style.height;
+			obj.style.width = '300px';
+			obj.style.height = '200px';
+		}
+		function smaller(obj) {
+			obj.style.width = objWidth;
+			obj.style.height = objHeight;
+		}
+	</script>
+
+
 <script type="text/javascript">
 //这是计时的程序
 
@@ -586,29 +713,29 @@ $(function(){
 	});
 	
 
-	
+	//污染源定位
 	$("#polution_edit_a").click(function(){
+		
 		 $.ajax({ 
             url:  "http://localhost:8080/WST/readInversionYaml.do", 
             type:'post', 
             success: function(data){ 
-            	alert("success");
-            	
+            	window.location = window.home();
             },
             error: function(data){
-            	alert("failture");
+            	//alert("failture");
+            	//window.location.re
             }
         }); 
-		//alert("niubi");
-	 	$('.welcome').css({'display':'none'});
-		$('.sample_edit').css({'display':'none'});
-		$('.dispatch_edit').css({'display':'none'});
-		$('.degassing_edit').css({'display':'none'});
-		$('.polution_edit').css({'display':'block'}); 
-		
-		//alert("你好");
-		
+			$('.welcome').css({'display':'none'});
+    		$('.sample_edit').css({'display':'none'});
+    		$('.dispatch_edit').css({'display':'none'});
+    		$('.degassing_edit').css({'display':'none'});
+    		$('.polution_edit').css({'display':'block'}); 
+				
 	}); 
+	
+	
 	$("#sample_edit_a").click(function(){
 		$('.welcome').css({'display':'none'});
 		$('.polution_edit').css({'display':'none'});
@@ -645,8 +772,8 @@ $(function(){
            url:  "http://localhost:8080/WST/readGrabsampleYaml.do", 
            type:'post', 
            success: function(data){ 
-           	alert("success");
-           	
+           //	alert("success");
+        	   alert("取样点优化");
            },
            error: function(data){
            	alert("取样点优化");
@@ -668,11 +795,11 @@ $(function(){
            url:  "http://localhost:8080/WST/readFlushingYaml.do", 
            type:'post', 
            success: function(data){ 
-           	alert("success");
+           //	alert("success");
            	
            },
            error: function(data){
-           	alert("阀门调度");
+           //	alert("阀门调度");
            }
        }); 
 	});
@@ -691,11 +818,11 @@ $(function(){
            url:  "http://localhost:8080/WST/readBoosterYaml.do", 
            type:'post', 
            success: function(data){ 
-           	alert("success");
+         //  	alert("success");
            	
            },
            error: function(data){
-           	alert("消毒增压");
+          // 	alert("消毒增压");
            }
        }); 
 	});

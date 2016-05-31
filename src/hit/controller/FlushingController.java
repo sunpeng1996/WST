@@ -44,7 +44,7 @@ public class FlushingController extends AbstractController {
 		 System.out.println(f.getAbsolutePath());
 		 HashMap ml = Yaml.loadType(new FileInputStream(f.getAbsolutePath()), HashMap.class);
 	     System.out.println(ml.size());        
-	     
+	 //    request.getSession().invalidate();
 	        HashMap network = (HashMap) ml.get("network");
 	        HashMap scenario = (HashMap) ml.get("scenario");
 	        HashMap flushing = (HashMap) ml.get("flushing");
@@ -228,6 +228,8 @@ public class FlushingController extends AbstractController {
 		long totalTime = endTime-startTime;
 		System.out.println("污染源定位程序运行时间： "+(totalTime)+"ms");
 		
+		String tiaozhuanweizhi3 = (String) request.getSession().getAttribute("output_prefix");
+		request.getSession().setAttribute("tiaozhuanweizhi3", tiaozhuanweizhi3);
 		
 		return "Page/flushing";
 		

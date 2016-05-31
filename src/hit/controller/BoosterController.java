@@ -44,6 +44,7 @@ public class BoosterController extends AbstractController {
 		 HashMap ml = Yaml.loadType(new FileInputStream(f.getAbsolutePath()), HashMap.class);
 	     System.out.println(ml.size());        
 	        //System.out.println();
+	   //  request.getSession().invalidate();
 	        HashMap booster_mip = (HashMap) ml.get("booster mip");
 	        HashMap network = (HashMap) ml.get("network");
 	        HashMap scenario = (HashMap) ml.get("scenario");
@@ -193,6 +194,8 @@ public class BoosterController extends AbstractController {
 		long totalTime = endTime-startTime;
 		System.out.println("消毒增压运行时间： "+(totalTime)+"ms");
 		
+		String tiaozhuanweizhi4 = (String) request.getSession().getAttribute("output_prefix_configure");
+		request.getSession().setAttribute("tiaozhuanweizhi4", tiaozhuanweizhi4);
 		return "Page/booster";
 		
 	}

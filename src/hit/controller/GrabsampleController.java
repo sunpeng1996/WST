@@ -36,18 +36,18 @@ public class GrabsampleController extends AbstractController {
 	@RequestMapping(value="/readGrabsampleYaml.do")
 	public void readYaml(HttpServletRequest request) throws FileNotFoundException{
 		//读取取样点优化的配置文件，并把数据保存到session域中
-	
+		
 		 File f = new File("G:/wst-1.2/bin/grabsample_ex1.yml");
 		 System.out.println(f.getAbsolutePath());
 		 HashMap ml = Yaml.loadType(new FileInputStream(f.getAbsolutePath()), HashMap.class);
-	     System.out.println(ml.size());        
-	        //System.out.println();
+	     System.out.println(ml.size());  
+	     System.out.println("到达取样点优化读取配置文件");
 	        HashMap grabsample = (HashMap) ml.get("grabsample");
 	        HashMap network = (HashMap) ml.get("network");
 	        HashMap scenario = (HashMap) ml.get("scenario");
 	        HashMap solver = (HashMap) ml.get("solver");
 	        HashMap configure = (HashMap) ml.get("configure");
-	        
+	      //  request.getSession().invalidate();
 	        request.getSession().setAttribute("epanet", network.get("epanet file"));//EPANET管网模型
 	        System.out.println(network.get("epanet file"));
 	        
@@ -81,6 +81,7 @@ public class GrabsampleController extends AbstractController {
 	        
 	        request.getSession().setAttribute("output_prefix", configure.get("output prefix"));
 	        request.getSession().setAttribute("debug", configure.get("debug"));
+	        
 	        
 		
 	}
@@ -177,6 +178,10 @@ public class GrabsampleController extends AbstractController {
 		long totalTime = endTime-startTime;
 		System.out.println("取样点优化程序运行时间： "+(totalTime)+"ms");
 		//然后跳转到运行之后生成的页面就可以了
+		
+		String tiaozhuanweizhi2 = (String) request.getSession().getAttribute("output_prefix");
+		request.getSession().setAttribute("tiaozhuanweizhi2", tiaozhuanweizhi2);
+		
 		return "Page/grabsample";
 		
 	}

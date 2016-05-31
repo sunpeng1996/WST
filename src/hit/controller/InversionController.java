@@ -45,14 +45,14 @@ public class InversionController extends AbstractController {
 		//读取污染源定位的配置文件，并把数据保存到session域中
 		
 		
-		request.getSession().removeAttribute("epanet");
+	
 		
-		System.out.println("到达污染源定位的后台action位置");
-		
+		     System.out.println("到达污染源定位的后台action位置");
+			
 			 File f = new File("G:/wst-1.2/bin/inversion_ex1.yml");
 			 System.out.println(f.getAbsolutePath());
 			 HashMap ml = Yaml.loadType(new FileInputStream(f.getAbsolutePath()), HashMap.class);
-
+			 //request.getSession().invalidate();//销毁Session
 	        HashMap network = (HashMap) ml.get("network");
 	        HashMap measurements = (HashMap) ml.get("measurements");
 	        HashMap inversion = (HashMap) ml.get("inversion");
@@ -94,7 +94,7 @@ public class InversionController extends AbstractController {
 	        
 	        
 	        
-			return null;
+			return "index";
 	}
 	
 	/**
@@ -190,9 +190,10 @@ public class InversionController extends AbstractController {
 		System.out.println("污染源定位程序运行时间： "+(totalTime)+"ms");
 		//然后跳转到运行之后生成的页面就可以了
 		
-		//作死，设计文件上传
-		//FileUploadToServer(request,"G:\\wst-1.2\\bin\\inversion_ex1\\Net3visualization_output.html");
+		String tiaozhuanWeizhi1 = (String) request.getSession().getAttribute("output_prefix");
 		
+		request.getSession().setAttribute("tiaozhuanWeizhi1", tiaozhuanWeizhi1);
+		System.out.println(tiaozhuanWeizhi1);
 		return "Page/inversion";
 		
 	}
