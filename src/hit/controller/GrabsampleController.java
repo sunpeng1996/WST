@@ -34,7 +34,7 @@ public class GrabsampleController extends AbstractController {
 	}
 	
 	@RequestMapping(value="/readGrabsampleYaml.do")
-	public void readYaml(HttpServletRequest request) throws FileNotFoundException{
+	public String readYaml(HttpServletRequest request) throws FileNotFoundException{
 		//读取取样点优化的配置文件，并把数据保存到session域中
 		
 		 File f = new File("G:/wst-1.2/bin/grabsample_ex1.yml");
@@ -82,7 +82,7 @@ public class GrabsampleController extends AbstractController {
 	        request.getSession().setAttribute("output_prefix", configure.get("output prefix"));
 	        request.getSession().setAttribute("debug", configure.get("debug"));
 	        
-	        
+	        return "index";
 		
 	}
 	

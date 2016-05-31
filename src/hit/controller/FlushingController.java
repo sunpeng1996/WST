@@ -103,7 +103,7 @@ public class FlushingController extends AbstractController {
 	        request.getSession().setAttribute("debug", configure.get("debug"));
 	        Date date = new Date();
 	        System.out.println("阀门调度文件已经取出"+date.toString());
-			return null;
+			return "index";
 			
 		
 	}

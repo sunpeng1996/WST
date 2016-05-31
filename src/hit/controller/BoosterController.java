@@ -94,7 +94,7 @@ public class BoosterController extends AbstractController {
 	        
 	        Date date = new Date();
 	        System.out.println("消毒增压文件已经取出"+date.toString());
-			return null;
+			return "index";
         
 		
 	}

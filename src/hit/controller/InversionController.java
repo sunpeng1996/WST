@@ -193,7 +193,7 @@ public class InversionController extends AbstractController {
 		String tiaozhuanWeizhi1 = (String) request.getSession().getAttribute("output_prefix");
 		
 		request.getSession().setAttribute("tiaozhuanWeizhi1", tiaozhuanWeizhi1);
-		System.out.println(tiaozhuanWeizhi1);
+		System.out.println(tiaozhuanWeizhi1+"第一个文件");
 		return "Page/inversion";
 		
 	}

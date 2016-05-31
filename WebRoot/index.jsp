@@ -22,27 +22,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 	<div class="leftsidebar_box">
 		<dl class="system_log">
-			<dt onClick="changeImage()">污染源定位<img src="images/left/select_xl01.png"></dt>
-			<dd class="first_dd"><a href="##" id="polution_edit_a" >编辑</a></dd>
-			<dd><a href="<%=path %>/Inversion.do" id="degassing_count">计算</a></dd>
+			<dt onClick="changeImage()" id="polution">污染源定位<img src="images/left/select_xl01.png"></dt>
+			<dd class="first_dd"><a href="<%=path %>/readInversionYaml.do" id="polution_edit_a" >编辑</a></dd>
+			<dd><a href="<%=path %>/Inversion.do" id="degassing_count1">计算</a></dd>
 		</dl>
 	
 		<dl class="custom">
-			<dt onClick="changeImage()">取样点优化<img src="images/left/select_xl01.png"></dt>
-			<dd class="first_dd"><a href="##" id="sample_edit_a">编辑</a></dd>
-			<dd><a href="<%=path %>/Grabsample.do" id="degassing_count">计算</a></dd>
+			<dt onClick="changeImage()" id="sample">取样点优化<img src="images/left/select_xl01.png"></dt>
+			<dd class="first_dd"><a href="<%=path %>/readGrabsampleYaml.do" id="sample_edit_a">编辑</a></dd>
+			<dd><a href="<%=path %>/Grabsample.do" id="degassing_count2">计算</a></dd>
 		</dl>
 	
 		<dl class="channel">
-			<dt>阀门调度<img src="images/left/select_xl01.png"></dt>
-			<dd class="first_dd"><a href="##" id="dispatch_edit_a">编辑</a></dd>
-			<dd><a href="<%=path %>/Flushing.do" id="degassing_count">计算</a></dd>
+			<dt id="dispatch">阀门调度<img src="images/left/select_xl01.png"></dt>
+			<dd class="first_dd"><a href="<%=path %>/readFlushingYaml.do" id="dispatch_edit_a">编辑</a></dd>
+			<dd><a href="<%=path %>/Flushing.do" id="degassing_count3">计算</a></dd>
 		</dl>
 	
 		<dl class="app">
-			<dt onClick="changeImage()">消毒增压<img src="images/left/select_xl01.png"></dt>
-			<dd class="first_dd"><a href="##" id="degassing_edit_a">编辑</a></dd>
-			<dd><a href="<%=path %>/booster_mip.do" id="degassing_count">计算</a></dd>
+			<dt onClick="changeImage()" id="degassing">消毒增压<img src="images/left/select_xl01.png"></dt>
+			<dd class="first_dd"><a href="<%=path %>/readBoosterYaml.do" id="degassing_edit_a">编辑</a></dd>
+			<dd><a href="<%=path %>/booster_mip.do" id="degassing_count4">计算</a></dd>
 		</dl>
 		<div class="time_display">
 			计算时间：
@@ -68,8 +68,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<td><input type="text" value="${sessionScope.epanet }" name="epanet"></input></td>
 							<td>模型：</td>
 							<td>
-								<div name="algorithm" value="${sessionScope.algorithm }" >
-										  <select>
+								<div >
+						 <select  name="algorithm" value="${sessionScope.algorithm }" >
 						<option value="0" >-请选择-</option> 				  
 		  <option value="optimization" <c:if test="${sessionScope.algorithm == 'optimization' }">selected</c:if>>optimization</option>
 		  <option value="bayesian" <c:if test="${sessionScope.algorithm == 'bayesian' }">selected</c:if>>bayesian</option>
@@ -84,8 +84,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<td class="catalogue" colspan="2">监测数据</td>
 							<td>注入类型：</td>
 							<td>
-							<div name="formulation" value="${sessionScope.formulation }" >
-							<select>
+							<div >
+							<select name="formulation" value="${sessionScope.formulation }" >
 			<option value="0" >-请选择-</option> 
 										  
 		  <option value="LP_discrete" <c:if test="${sessionScope.formulation == 'LP_discrete' }">selected</c:if>>LP_discrete</option>
@@ -103,8 +103,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<td><input type="text" value="${sessionScope.grab_samples}" name="grab_samples"></input></td>
 							<td>模型格式：</td>
 							<td>
-							<div name="model_format" value="${sessionScope.model_format }" >
-							<select>
+							<div  >
+							<select name="model_format" value="${sessionScope.model_format }">
 			<option value="0" >-请选择-</option> 
 										  
 <option value="AMPL" <c:if test="${sessionScope.model_format == 'AMPL' }">selected</c:if>>AMPL</option>
@@ -192,8 +192,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<td>模型格式：</td>
 							<%-- <td><input type="text" value="${sessionScope.model_format }" name="model_format"></input></td> --%>
 					<td>
-							<div name="model_format" value="${sessionScope.model_format }" >
-							<select>
+							<div >
+							<select name="model_format" value="${sessionScope.model_format }" >
 								<option value="0" >-请选择-</option> 
 								<option value="AMPL" <c:if test="${sessionScope.model_format == 'AMPL' }">selected</c:if>>AMPL</option>
 								<option value="PYOMO" <c:if test="${sessionScope.model_format == 'PYOMO' }">selected</c:if>>PYOMO</option>
@@ -219,8 +219,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<td>类型：</td>
 							<%-- <td><input type="text" value="${sessionScope.type_changjing}" name="type_changjing"></input></td> --%>
 								<td>
-							<div name="type_changjing" value="${sessionScope.type_changjing }" >
-							<select>
+							<div >
+							<select name="type_changjing" value="${sessionScope.type_changjing }" >
 						<option value="0" >-请选择-</option> 
 			<option value="null" <c:if test="${sessionScope.type_changjing == 'null' }">selected</c:if>>null</option>
 			<option value="MASS" <c:if test="${sessionScope.type_changjing == 'AMPL' }">selected</c:if>>MASS</option>
@@ -322,11 +322,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<td><input type="text" value="${sessionScope.epanet }" name="epanet"></input></td>
 							<td>传感器节点编号：('')</td>
 							<!-- <textarea  onfocus="bigger(this);" onblur="smaller(this);"></textarea> -->
-						<!-- 	<td>
-									<textarea  contenteditable="true"  name="detection" onfocus="bigger(this);" onblur="smaller(this);"></textarea>
-							</td> -->
+							<%-- <input type="text" value="${sessionScope.detection }" name="detection" ></input></td> --%>
 							<td>
-							<input type="text" value="${sessionScope.detection }" name="detection"></input></td>
+							<div>
+									<textarea  name="detection" onfocus="bigger(this);" onblur="smaller(this);">${sessionScope.detection }</textarea>
+							</div>
+							</td>
 						</tr>
 						<tr>
 							<td class="catalogue" colspan="2">场景</td>
@@ -336,13 +337,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<td >位置：('')</td>
 							<td><input type="text" value="${sessionScope.location }" name="location"></input></td>
 							<td>可行节点：</td>
-							<td><input type="text" value="${sessionScope.feasible_nodes }" name="feasible_nodes"></input></td>
+							<td>
+							<div>
+								<textarea name="feasible_nodes" onfocus="bigger(this);" onblur="smaller(this);">${sessionScope.feasible_nodes }</textarea>
+							</div>
+							</td>
+							<%-- <td><input type="text" value="${sessionScope.feasible_nodes }" name="feasible_nodes"></input></td> --%>
 						</tr>
 						<tr>
 							<td>类型：</td>
 							<td><input type="text" value="${sessionScope.type_scenario }" name="type_scenario"></input></td>
 							<td>不可行节点：</td>
-							<td><input type="text" value="${sessionScope.infeasible_nodes }" name="infeasible_nodes"></input></td>
+							<td>
+								<textarea name="infeasible_nodes" onfocus="bigger(this);" onblur="smaller(this);">${sessionScope.infeasible_nodes }</textarea>
+							</td>
+						<%-- 	<td><input type="text" value="${sessionScope.infeasible_nodes }" name="infeasible_nodes"></input></td> --%>
 						</tr>
 						<tr>
 							<td>强度：</td>
@@ -383,13 +392,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<td>MSX文件：</td>
 							<td><input type="text" value="${sessionScope.msx_file }" name="msx_file"></input></td>
 							<td>可行管道：</td>
-							<td><input type="text" value="${sessionScope.feasible_pipes }" name="feasible_pipes"></input></td>
+							
+							<td>
+								<textarea name="feasible_pipes" onfocus="bigger(this);" onblur="smaller(this);">${sessionScope.feasible_pipes }</textarea>
+							</td>
+							
+							<%-- <td><input type="text" value="${sessionScope.feasible_pipes }" name="feasible_pipes"></input></td> --%>
 						</tr>
 						<tr>
 							<td>MSX种类：</td>
 							<td><input type="text" value="${sessionScope.msx_species_scenario }" name="msx_species_scenario"></input></td>
 							<td>不可行管道：</td>
-							<td><input type="text" value="${sessionScope.infeasible_pipes }" name="infeasible_pipes"></input></td>
+							<td>
+								<textarea name="infeasible_pipes" onfocus="bigger(this);" onblur="smaller(this);">${sessionScope.infeasible_pipes }</textarea>
+							</td>
+							
+							
+							<%-- <td><input type="text" value="${sessionScope.infeasible_pipes }" name="infeasible_pipes"></input></td> --%>
 						</tr>
 						<tr>
 							<td>merlion：</td>
@@ -470,16 +489,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<tr>
 							<td>epanet文件</td>
 							<td><input type="text" value="${sessionScope.epanet }"  name="epanet"></input></td>
-							<td>传感器节点编号：</td>
-							<td><input type="text" value="${sessionScope.detection_booster_mip}"  name="detection_booster_mip"></input></td>
+							<td>传感器节点编号('')：</td>
+							<td>
+								<textarea name="detection_booster_mip" onfocus="bigger(this);" onblur="smaller(this);">${sessionScope.detection_booster_mip }</textarea>
+							</td>
+					<%-- 		<td><input type="text" value="${sessionScope.detection_booster_mip}"  name="detection_booster_mip"></input></td> --%>
 						</tr>
 						<tr>
 							<td class="catalogue" colspan="2">场景</td>
 							<td>模型格式：</td>
 							<td>
-							<div name="model_format_booster_mip" value="${sessionScope.model_format_booster_mip }" >
-							<select>
-			<option value="0" >-请选择-</option> 
+							<div>
+							<select name="model_format_booster_mip" value="${sessionScope.model_format_booster_mip }" >
+		  <option value="0" >-请选择-</option> 
 		  <option value="AMPL" <c:if test="${sessionScope.model_format_booster_mip == 'AMPL' }">selected</c:if>>AMPL</option>
 		  <option value="PYOMO" <c:if test="${sessionScope.model_format_booster_mip == 'PYOMO' }">selected</c:if>>PYOMO</option>
 						  </select>
@@ -493,14 +515,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<td><input type="text" value="${sessionScope.location_scenario }" name="location_scenario"></input></td>
 							<td>模型类型：</td>
 							<td>
-							<div name="model_type_booster_mip" value="${sessionScope.model_type_booster_mip }" >
-							<select>
-			<option value="0" >-请选择-</option> 
-		  <option value="NEUTRAL" <c:if test="${sessionScope.model_type_booster_mip == 'NEUTRAL' }">selected</c:if>>NEUTRAL</option>
-		  <option value="LIMIT" <c:if test="${sessionScope.model_type_booster_mip == 'LIMIT' }">selected</c:if>>LIMIT</option>
-						  </select>
-								</div>
-								</td>
+							<div>
+		<select name="model_type_booster_mip" value="${sessionScope.model_type_booster_mip }">
+			<option value="ssss" >-请选择-</option> 
+		  <option value="NEUTRAL" <c:if test="${sessionScope.model_type_booster_mip eq 'NEUTRAL' }">selected</c:if>>NEUTRAL</option>
+		  <option value="LIMIT" <c:if test="${sessionScope.model_type_booster_mip eq 'LIMIT' }">selected</c:if>>LIMIT</option>
+	  </select>
+							</div>
+							</td>
 							
 							
 						<%-- 	<td><input type="text" value="${sessionScope.model_type_booster_mip }" name="model_type_booster_mip"></input></td> --%>
@@ -520,8 +542,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<tr>
 							<td>类型：</td>
 							<td>
-							<div name="type_scenario" value="${sessionScope.type_scenario }" >
-							<select>
+							<div  >
+							<select name="type_scenario" value="${sessionScope.type_scenario }">
 				<option value="0" >-请选择-</option> 
 			  <option value="MASS" <c:if test="${sessionScope.type_scenario == 'MASS' }">selected</c:if>>MASS</option>
 			  <option value="FLOWPACED" <c:if test="${sessionScope.type_scenario == 'FLOWPACED' }">selected</c:if>>FLOWPACED</option>
@@ -545,13 +567,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<td>结束时间：</td>
 							<td><input type="text" value="${sessionScope.end_time_scenario }" name="end_time_scenario"></input></td>
 							<td>可行节点：</td>
-							<td><input type="text" value="${sessionScope.feasible_nodes_booster_mip }" name="feasible_nodes_booster_mip"></input></td>
+							<td>
+								<textarea name="feasible_nodes_booster_mip" onfocus="bigger(this);" onblur="smaller(this);">${sessionScope.feasible_nodes_booster_mip }</textarea>
+							</td>
+							
+						<%-- 	<td><input type="text" value="${sessionScope.feasible_nodes_booster_mip }" name="feasible_nodes_booster_mip"></input></td> --%>
 						</tr>
 						<tr>
 							<td>tsg文件：</td>
 							<td><input type="text" value="${sessionScope.tsg_file_scenario }" name="tsg_file_scenario"></input></td>
 							<td>不可行节点：</td>
-							<td><input type="text" value="${sessionScope.infeasible_nodes_booster_mip }" name="infeasible_nodes_booster_mip"></input></td>
+							<td>
+								<textarea name="infeasible_nodes_booster_mip" onfocus="bigger(this);" onblur="smaller(this);">${sessionScope.infeasible_nodes_booster_mip }</textarea>
+							</td>
+							
+						<%-- 	<td><input type="text" value="${sessionScope.infeasible_nodes_booster_mip }" name="infeasible_nodes_booster_mip"></input></td> --%>
 						</tr>
 						<tr>
 							<td>tsi文件：</td>
@@ -563,7 +593,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<td>msx文件：</td>
 							<td><input type="text" value="${sessionScope.msx_file_scenario }" name="msx_file_scenario"></input></td>
 							<td>固定节点：</td>
-							<td><input type="text" value="${sessionScope.fixed_nodes_booster_mip }" name="fixed_nodes_booster_mip"></input></td>
+							
+							<td>
+								<textarea name="fixed_nodes_booster_mip" onfocus="bigger(this);" onblur="smaller(this);">${sessionScope.fixed_nodes_booster_mip }</textarea>
+							</td>
+							
+						<%-- 	<td><input type="text" value="${sessionScope.fixed_nodes_booster_mip }" name="fixed_nodes_booster_mip"></input></td> --%>
 						</tr>
 						<tr>
 							<td>msx种类：</td>
@@ -576,12 +611,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<td><input type="text" value="${sessionScope.merlion_scenario }" name="merlion_scenario"></input></td>
 							<td>类型：</td>
 							<td>
-							<div name="type_booster_mip_booster_mip" value="${sessionScope.type_booster_mip_booster_mip }" >
-							<select>
-								<option value="0" >-请选择-</option> 
-							  <option value="MASS" <c:if test="${sessionScope.type_booster_mip_booster_mip  eq  'MASS' }">selected</c:if>>MASS</option>
-							  <option value="FLOWPACED" <c:if test="${sessionScope.type_booster_mip_booster_mip eq  'FLOWPACED' }">selected</c:if>>FLOWPACED</option>
-						  </select>
+							<div >
+							<select name="type_booster_mip_booster_mip" value="${sessionScope.type_booster_mip_booster_mip }" >
+											<option value="0" >-请选择-</option> 
+										  	<option value="MASS" <c:if test="${sessionScope.type_booster_mip_booster_mip  eq  'MASS' }">selected</c:if>>MASS</option>
+										 	 <option value="FLOWPACED" <c:if test="${sessionScope.type_booster_mip_booster_mip eq  'FLOWPACED' }">selected</c:if>>FLOWPACED</option>
+						  	</select>
 								</div>
 								</td>
 							
@@ -660,7 +695,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	var minu=0;
 	var hou=0;
 
-$('#degassing_count').click(function(){
+$('#degassing_count1').click(function(){
 //每隔一秒刷新一次
 window.setTimeout("uupdate()",1000);
 });
@@ -683,6 +718,74 @@ function uupdate()
     window.setTimeout("uupdate()",1000);
 }
 
+$('#degassing_count2').click(function(){
+//每隔一秒刷新一次
+window.setTimeout("uupdate()",1000);
+});
+
+function uupdate()
+{
+    sec++;    
+    if(sec==60)
+    {
+        sec =0;
+        minu +=1;
+    }
+    if(minu==60)
+    {
+        minu=0;
+        hou+=1;
+    }
+    var ss04 =hou+ "时"+minu+"分"+sec+"秒";
+    document.getElementById('yy004').innerHTML=ss04;
+    window.setTimeout("uupdate()",1000);
+}
+
+$('#degassing_count3').click(function(){
+//每隔一秒刷新一次
+window.setTimeout("uupdate()",1000);
+});
+
+function uupdate()
+{
+    sec++;    
+    if(sec==60)
+    {
+        sec =0;
+        minu +=1;
+    }
+    if(minu==60)
+    {
+        minu=0;
+        hou+=1;
+    }
+    var ss04 =hou+ "时"+minu+"分"+sec+"秒";
+    document.getElementById('yy004').innerHTML=ss04;
+    window.setTimeout("uupdate()",1000);
+}
+
+$('#degassing_count4').click(function(){
+//每隔一秒刷新一次
+window.setTimeout("uupdate()",1000);
+});
+
+function uupdate()
+{
+    sec++;    
+    if(sec==60)
+    {
+        sec =0;
+        minu +=1;
+    }
+    if(minu==60)
+    {
+        minu=0;
+        hou+=1;
+    }
+    var ss04 =hou+ "时"+minu+"分"+sec+"秒";
+    document.getElementById('yy004').innerHTML=ss04;
+    window.setTimeout("uupdate()",1000);
+}
 </script>
 
 
@@ -714,19 +817,7 @@ $(function(){
 	
 
 	//污染源定位
-	$("#polution_edit_a").click(function(){
-		
-		 $.ajax({ 
-            url:  "http://localhost:8080/WST/readInversionYaml.do", 
-            type:'post', 
-            success: function(data){ 
-            	window.location = window.home();
-            },
-            error: function(data){
-            	//alert("failture");
-            	//window.location.re
-            }
-        }); 
+	$("#polution").click(function(){
 			$('.welcome').css({'display':'none'});
     		$('.sample_edit').css({'display':'none'});
     		$('.dispatch_edit').css({'display':'none'});
@@ -760,7 +851,7 @@ $(function(){
 	
 	
 	//取样点优化点击编辑
-	$("#sample_edit_a").click(function(){
+	$("#sample").click(function(){
 		
 		$('.welcome').css({'display':'none'});
 		$('.polution_edit').css({'display':'none'});
@@ -768,45 +859,23 @@ $(function(){
 		$('.degassing_edit').css({'display':'none'});
 		$('.sample_edit').css({'display':'block'}); 
 		
-		 $.ajax({ 
-           url:  "http://localhost:8080/WST/readGrabsampleYaml.do", 
-           type:'post', 
-           success: function(data){ 
-           //	alert("success");
-        	   alert("取样点优化");
-           },
-           error: function(data){
-           	alert("取样点优化");
-           }
-       }); 
 	});
 	
 	
 	//阀门调度编辑
-	$("#dispatch_edit_a").click(function(){
+	$("#dispatch").click(function(){
 		
 		$('.welcome').css({'display':'none'});
 		$('.sample_edit').css({'display':'none'});
 		$('.polution_edit').css({'display':'none'});
 		$('.degassing_edit').css({'display':'none'});
 		$('.dispatch_edit').css({'display':'block'});
-		
-		 $.ajax({ 
-           url:  "http://localhost:8080/WST/readFlushingYaml.do", 
-           type:'post', 
-           success: function(data){ 
-           //	alert("success");
-           	
-           },
-           error: function(data){
-           //	alert("阀门调度");
-           }
-       }); 
+
 	});
 	
 	
  	//消毒增压编辑
-	$("#degassing_edit_a").click(function(){
+	$("#degassing").click(function(){
 		
 		$('.welcome').css({'display':'none'});
 		$('.sample_edit').css({'display':'none'});
@@ -814,23 +883,29 @@ $(function(){
 		$('.polution_edit').css({'display':'none'});
 		$('.degassing_edit').css({'display':'block'});
 		
-		 $.ajax({ 
-           url:  "http://localhost:8080/WST/readBoosterYaml.do", 
-           type:'post', 
-           success: function(data){ 
-         //  	alert("success");
-           	
-           },
-           error: function(data){
-          // 	alert("消毒增压");
-           }
-       }); 
 	});
 	
 	
 	
 });
 </script>
+
+<script type="text/javascript">
+	function myBigger(){
+		 /*  var name=prompt("请输入您的名字","");//将输入的内容赋给变量 name ，
+		    //这里需要注意的是，prompt有两个参数，前面是提示的话，后面是当对话框出来后，在对话框里的默认值
+		    if(name)//如果返回的有内容
+		    {
+		        alert("欢迎您："+ name)
+		    } */
+	}
+
+</script>
+
+
+
+
+
 
 </body>
 </html>

@@ -42,7 +42,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   
  	response.reset();
-	response.setContentType("text/html ");
+	response.setContentType("text/html");
 	OutputStream output = response.getOutputStream();// 得到输出流  
 	File file = new File("G:\\wst-1.2\\bin\\"+name+"\\"+prefix+"visualization_output.html");// 文件流  
 	BufferedInputStream bis = new BufferedInputStream(new FileInputStream(file));// 输入缓冲流  
