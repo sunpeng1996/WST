@@ -1,0 +1,16 @@
+/*wpl*/
+.panel_new{overflow:hidden; position:relative; width:99.8% !important; padding:0px 0px 10px 0px !important;}
+.panel_new .panel_btn{float:right; overflow:hidden;}
+.panel_new .panel_left{ overflow:hidden;}
+.panel_new .panel_left label{width:25%; float:left; text-align:center; margin:10px 0px 0px;}
+.panel_new .panel_left span.panel_span{display:inline-block; width:92px;}
+.panel_new .panel_left input,.panel_new .panel_left select{height:20px; width:150px; padding:0; border:1px solid #ccc;}
+.panel_btn{margin-right:2.4%; margin-top:10px;}
+.datagrid-body{overflow:inherit !important;}
+.tabs-header{padding-top:8px;}
+.panel_new .panel_left input.textbox-text{border:none;}
+#waterTargetDetaiForm .bottomthis input{width:auto !important; color:red !important;}
+.bottomthis td{color:red;}
+.water_txt{ margin:10px auto 0px auto; width:94%; overflow:hidden;}
+.water_txt label{display:inline-block; margin:0 10px; color:#666;}
+.water_txt label b{font-weight:normal;}

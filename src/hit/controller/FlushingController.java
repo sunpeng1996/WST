@@ -52,6 +52,7 @@ public class FlushingController extends AbstractController {
 	        HashMap configure = (HashMap) ml.get("configure");
 	        HashMap impact = (HashMap) ml.get("impact");
 	        
+	      
 	        request.getSession().setAttribute("epanet", network.get("epanet file"));//EPANET管网模型
 	        System.out.println(network.get("epanet file"));
 	        
@@ -130,6 +131,8 @@ public class FlushingController extends AbstractController {
 			@RequestParam(defaultValue="") String logfile,@RequestParam(defaultValue="") String detection_limit,@RequestParam(defaultValue="") String verbose,
 			@RequestParam(defaultValue="") String detection_confidence,@RequestParam(defaultValue="") String msx_species_impact,@RequestParam(defaultValue="") String output_prefix,
 			@RequestParam(defaultValue="") String debug,@RequestParam(defaultValue="") String species) throws FileNotFoundException{
+		
+		
 		
 			System.out.println("正在更改文件");
 			//读取污染源定位的配置文件，并把数据保存到session域中

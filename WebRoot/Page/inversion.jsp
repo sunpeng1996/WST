@@ -32,9 +32,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   
   <body>
+	
+  <div>
   
+  <script type="text/javascript">
+  
+  
+  $(document).ready(function(){
+	  window.showModalDialog("b.htm", "", "dialogWidth:100px; dialogHeight:80px;scroll :0;status:0;help:0;resizable:0");
+  });
+  
+  
+  </script>
+  
+
   
   <%
+  
    String location = (String)request.getSession().getAttribute("tiaozhuanWeizhi1");
   String[] buff = location.split("/");
   String name = buff[0];
@@ -61,5 +75,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	out.clear();
 	out = pageContext.pushBody();
 	%>
+	</div>
+	<div>
+		啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊
+	
+	</div>
   </body>
+  
 </html>

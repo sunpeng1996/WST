@@ -52,14 +52,17 @@ public class modifyYml3 {
 		   BufferedWriter File_bak=new BufferedWriter(new FileWriter(new File(filePath)));
 		   String s=new String();
 		 
-		   for(int j=0;j<list.size()-1;j++){
+		   for(int j=0 ;j<list.size()-1;j++){
 		    //使用循环把行字符串取出来,并调用replaceall函数,对字符内容进行正则表达式替换
 				    s=list.get(j);
 				   
 				    if(s.contains("!java.util.HashMap")){
 				    	String new_s = s.replace("!java.util.HashMap", "");
+				    	if (new_s.contains("\"")) {
+							new_s = s.replace("\"", "");
+						}
 				    	File_bak.write(new_s+"\n");
-				    }else if (s.contains("location")) {//位置
+				    }/*else if (s.contains("location")) {//位置
 						String new_s = s.replace("\"", "");
 						File_bak.write(new_s+"\n");
 					}
@@ -72,18 +75,28 @@ public class modifyYml3 {
 					}else if (s.contains("detection:")) {
 						String new_s = s.replace("\"", "");
 						File_bak.write(new_s+"\n");
-					}
+					}*/
+				  
 				    else if(s.contains("--- ")) {
 				    	String new_s = s.replace("---", "");
+				    	if (new_s.contains("\"")) {
+							new_s = s.replace("\"", "");
+						}
 						File_bak.write(new_s+"\n");
-					}else if (s.contains("\"") && (!s.contains("["))) {//包含" 不包含【  去除
+					}/*else if (s.contains("\"") && (!s.contains("["))) {//包含" 不包含【  去除
 						String new_s = s.replace("\"", "");
 						File_bak.write(new_s+"\n");
 					}else if (s.contains("\'") && s.contains("[")) { //包含' 包含[  不变
 						File_bak.write(s+"\n");
-					}
+					}*/
 					else if (s.contains("!java.lang.Double")) {
 						String new_s = s.replace("!java.lang.Double", "");
+						if (new_s.contains("\"")) {
+							new_s = s.replace("\"", "");
+						}
+						File_bak.write(new_s+"\n");
+					}else if (s.contains("\"")) {
+						String new_s =  s.replace("\"", "");
 						File_bak.write(new_s+"\n");
 					}
 					else {

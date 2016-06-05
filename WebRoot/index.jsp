@@ -23,14 +23,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<div class="leftsidebar_box">
 		<dl class="system_log">
 			<dt onClick="changeImage()" id="polution">污染源定位<img src="images/left/select_xl01.png"></dt>
-			<dd class="first_dd"><a href="<%=path %>/readInversionYaml.do" id="polution_edit_a" >编辑</a></dd>
-			<dd><a href="<%=path %>/Inversion.do" id="degassing_count1">计算</a></dd>
+			<dd><a  href="<%=path %>/readInversionYaml.do" id="degassing_count1">刷新</a></dd>
+			<dd class="first_dd"><a  id="polution_edit_a" >编辑</a></dd>
+			<dd><a  href="<%=path %>/Inversion.do" id="degassing_count1">计算</a></dd>
 		</dl>
 	
 		<dl class="custom">
 			<dt onClick="changeImage()" id="sample">取样点优化<img src="images/left/select_xl01.png"></dt>
 			<dd class="first_dd"><a href="<%=path %>/readGrabsampleYaml.do" id="sample_edit_a">编辑</a></dd>
-			<dd><a href="<%=path %>/Grabsample.do" id="degassing_count2">计算</a></dd>
+			<dd><a  target="_blank"  href="<%=path %>/Grabsample.do" id="degassing_count2">计算</a></dd>
 		</dl>
 	
 		<dl class="channel">

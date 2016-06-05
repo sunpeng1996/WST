@@ -32,6 +32,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   
   <body>
+  <div>
+		啊啊啊啊
+	
+	</div>
+  
+  
+  <div>
      <%
      String tiaozhuanweizhi2 = (String)request.getSession().getAttribute("tiaozhuanweizhi2");
      String buff[] = tiaozhuanweizhi2.split("/");
@@ -58,5 +65,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	out.clear();
 	out = pageContext.pushBody();
 	%>
+	</div>
+	
   </body>
 </html>
